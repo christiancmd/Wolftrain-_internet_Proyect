@@ -1,18 +1,20 @@
-/*Create an account */
+/*Z-index Position*/
 
-const buttonForm = document.querySelector('#button-register');
+const registerBox = document.querySelector('.form-register');
+const loginBox = document.querySelector('.form-login');
 
-function voidInput() {
-    const nameInput = Array.from(document.querySelectorAll('.input'));
-    for (const element of nameInput) {
-        element.value = '';
-    }
-}
+const b_register = document.querySelector('#b-register');
+const b_login = document.querySelector('#b-login');
 
-function activeButton(e) {
-    voidInput();
-    event.preventDefault();
-    alert('Procedimiento negado. No hay servidor')
-}
+console.log(b_register);
+console.log(b_login);
 
-buttonForm.addEventListener('click', activeButton);
+b_register.addEventListener('click', (e) => {
+    loginBox.style.zIndex = '10';
+    registerBox.style.zIndex = '1';
+});
+
+b_login.addEventListener('click', (e) => {
+    loginBox.style.zIndex = '1';
+    registerBox.style.zIndex = '10';
+});
