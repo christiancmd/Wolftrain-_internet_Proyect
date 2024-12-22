@@ -104,7 +104,8 @@ button {
     width: 100%;
     left: -100%;
     height: 120vh;
-    background: url(/src/img/background-movil-hiperlink.jpg);
+
+    background-image: url(../img/background-movil-hiperlink.jpg);
     background-position: center;
     background-size: cover;
     top: -80px;
@@ -190,7 +191,7 @@ button {
 
 
 #container-form {
-    background: linear-gradient(to bottom, rgba(187, 233, 239, 0.719) 0%, rgba(5, 65, 71, 0.719) 40%, rgba(78, 53, 11, 0.695) 100%), url(/src/img/register-img/background-register-img.jpg);
+    background: linear-gradient(to bottom, rgba(187, 233, 239, 0.719) 0%, rgba(5, 65, 71, 0.719) 40%, rgba(78, 53, 11, 0.695) 100%), url(../img/register-img/background-register-img.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: none;
@@ -604,7 +605,7 @@ form {
     #container-form .initial-box-form {
         height: 500px;
         width: 550px;
-        background: linear-gradient(to bottom, rgba(6, 52, 57, 0.219) 0%, rgba(78, 53, 11, 0.295) 100%), url(/src/img/register-img/register-img.jpg);
+        background: linear-gradient(to bottom, rgba(6, 52, 57, 0.219) 0%, rgba(78, 53, 11, 0.295) 100%), url(../img/register-img/register-img.jpg);
         background-repeat: none;
         background-position: center;
         background-size: cover;

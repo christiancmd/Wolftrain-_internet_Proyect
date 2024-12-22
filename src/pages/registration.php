@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Icon-->
-    <link rel="icon" href="/public/Logo.jpg">
+    <link rel="icon" href="../../public/Logo.jpg">
     <!--Author-->
     <meta name="Author" content="Ing.Christian Parisca">
     <!--Styles-->
-    <link rel="stylesheet" href="/src/style/registration.css">
+    <link rel="stylesheet" href="../style/registration.css">
     <!--Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,12 +36,12 @@
     <header id="header-container">
         <div class="header-box">
             <div class="title">
-                <img src="/public/Logo.jpg" alt="Our icon">
+                <img src="../../public/Logo.jpg" alt="Our icon">
                 <h1><a href="../../index.html">WolfTrain</a></h1>
             </div>
             <nav class="navegator-box">
                 <ul class="ul-list-mobile">
-                    <img id="icon-close" src="/src/img/icon-nav/close.png" alt="">
+                    <img id="icon-close" src="../img/icon-nav/close.png" alt="">
                     <li><a href="../../index.html">Inicio</a></li>
                     <li><a href="registration.html">Registrarse</a></li>
                     <li><a href="aboutUs.html">Sobre Nosotros</a></li>
@@ -58,7 +58,7 @@
                     </label>
                 </div>
             </nav>
-            <a class="icon-personal" href="registration.html">
+            <a class="icon-personal" href="registration.php">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="50" height="50" viewBox="0 0 24 24">
                     <path
                         d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
@@ -125,14 +125,14 @@
                             </a>
                         </div>
                     </div>
-                    <form action="/">
+                    <form action="../php/login_db.php" method="POST">
                         <div class="input-group">
-                            <input class="input" type="email" required id="email">
+                            <input class="input" type="email" required id="email" name="Email">
                             <label class="label" for="email">Correo Electronico</label>
                         </div>
 
                         <div class="input-group">
-                            <input class="input" type="text" required id="password">
+                            <input class="input" type="text" required id="password" name="Password" maxlength="9">
                             <label class="label" for="password">Contraseña</label>
                         </div>
 
@@ -191,24 +191,24 @@
                             </a>
                         </div>
                     </div>
-                    <form action="/">
+                    <form action="../php/register_db.php" method="POST">
                         <div class="input-group">
-                            <input class="input" type="text" required id="username">
+                            <input class="input" type="text" required id="username" name="Full_name">
                             <label class="label" for="username">Nombre Completo</label>
                         </div>
 
                         <div class="input-group">
-                            <input class="input" type="email" required id="email">
+                            <input class="input" type="email" required id="email" name="Email">
                             <label class="label" for="email">Correo Electronico</label>
                         </div>
 
                         <div class="input-group">
-                            <input class="input" type="text" required id="user">
+                            <input class="input" type="text" required id="user" name="Name_user">
                             <label class="label" for="email">Usuario</label>
                         </div>
 
                         <div class="input-group">
-                            <input class="input" type="text" required id="password">
+                            <input class="input" type="password" required id="password" name="Password" maxlength="9">
                             <label class="label" for="password">Contraseña</label>
                         </div>
 
@@ -228,7 +228,7 @@
         <div class="footer-box">
             <div class="footer-box-content">
                 <div class="footer-principal">
-                    <img src="/public/Logo.jpg" alt="Logo">
+                    <img src="../../public/Logo.jpg" alt="Logo">
                     <h2>WolfTrain</h2>
                 </div>
 
@@ -265,8 +265,8 @@
     </footer>
 
 
-    <script src="/src/app/register.js"></script>
-    <script src="/src/app/actionNav.js"></script>
+    <script src="../app/register.js"></script>
+    <script src="../app/actionNav.js"></script>
 </body>
 
 </html>
