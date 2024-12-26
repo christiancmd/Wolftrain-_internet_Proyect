@@ -16,11 +16,12 @@ $name_user = strtolower($name_user);
 $password = $_POST['Password'];
 //incriptar password
 $password = hash(algo: 'sha512', data: $password);
+$rol_id = 2;
 
 //Parejamos y insertamos los datos en la base de datos
 
-$query = "INSERT INTO usuarios(Full_name, Email, Name_user, Password)
-            VALUES ('$full_name', '$email', '$name_user', '$password')";
+$query = "INSERT INTO usuarios(Full_name, Email, Name_user, Password, rol_id)
+            VALUES ('$full_name', '$email', '$name_user', '$password', '$rol_id')";
 
 ///Verificar que el correo no se repita en la bd
 

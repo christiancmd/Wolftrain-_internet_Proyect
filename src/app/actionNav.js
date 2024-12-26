@@ -4,6 +4,9 @@
 const activeNavMobileButton = document.querySelector('#active-nav-button');
 const navigator = document.querySelector('.ul-list-mobile');
 
+console.dir(navigator);
+
+
 const actionNavMobile = () => {
     navigator.classList.toggle('action-nav');
 }
@@ -15,14 +18,16 @@ function activeNavMobile(e) {
 }
 
 const handleResize = () => {
-    if (window.innerWidth > 1000) {
-        navigator.classList.remove('ul-list-mobile');
-        navigator.classList.add('ul-nav-desktop');
-    }
-    else {
-        navigator.classList.remove('ul-nav-desktop');
-        navigator.classList.add('ul-list-mobile');
-        // navigator.classList.remove('action-nav');
+    if (navigator.id !== 'nav-php') {
+        if (window.innerWidth > 1000) {
+            navigator.classList.remove('ul-list-mobile');
+            navigator.classList.add('ul-nav-desktop');
+        }
+        else {
+            navigator.classList.remove('ul-nav-desktop');
+            navigator.classList.add('ul-list-mobile');
+            // navigator.classList.remove('action-nav');
+        }
     }
 }
 
