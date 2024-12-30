@@ -10,6 +10,9 @@ body {
     min-height: 100dvh;
     grid-template-rows: auto 1fr auto;
     width: 100%;
+    background-image: url(../img/about-us-img/background-white.jpg);
+    background-position: center;
+    background-size: cover;
 }
 
 html {
@@ -277,85 +280,77 @@ html {
 main {
     width: 100%;
     height: auto;
-    top: 100px;
+    top: 120px;
     position: relative;
 }
 
 
-/*-----------------------main:featured-products ------------------------------*/
-
-
-.featured-products {
-    /* background-color: var(--gray); */
-    background: url(../img/img-services/background-white.jpg);
-    background-position: center;
-    background-size: cover;
+.product-grid {
     width: 100%;
-    padding: 50px 0 150px 0;
+    height: 600px;
+    padding: 0px 25px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    margin-bottom: 200px;
+}
+
+.product-grid .product {
+    display: flex;
     flex-direction: column;
-    gap: 35px;
-}
-
-.featured-products h3 {
-    font-size: clamp(1.5em, 1rem + 0.6vw, 2.1em);
-}
-
-.featured-products .product-grid {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-
-
-.featured-products .product {
-    display: flex;
-    background-color: var(--white);
-    width: 100%;
-    height: 200px;
-    text-align: center;
-    box-shadow: 0 0 10px var(--black);
+    max-width: 500px;
+    max-height: 520px;
+    border: 1px solid var(--dark-gray);
+    box-shadow: 0 0 15px var(--black);
+    border-radius: 15px;
     overflow: hidden;
+    padding-bottom: 10px;
+    background-color: var(--white);
+
 }
 
-.featured-products .product :is(figure, div) {
-    width: 50%;
-    height: 100%;
+.product-grid .product figure {
+    width: 100%;
+    height: 250px;
 }
 
-
-.featured-products .product div {
-    padding-top: 25px;
-}
-
-.featured-products .product img {
+.product-grid .product figure img {
     width: 100%;
     height: 100%;
-    object-fit: fill;
-}
-
-.featured-products .product h3 {
-    margin-bottom: 10px;
-    font-weight: bold;
-    font-size: clamp(1.3em, 4.5vw, 2.1em);
-}
-
-.featured-products .product p {
-    font-size: clamp(1em, 4.5vw, 1.6em);
-    margin-bottom: 15px;
-    font-weight: bold;
+    object-fit: cover;
 
 }
 
-.featured-products button {
-    height: 40px;
-    width: 115px;
+.product-grid .product .info-product {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    padding: 25px;
+    height: 70%;
+}
+
+.product-grid .product .info-product .principal-info-product {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-grid .product .info-product .principal-info-product p {
+    font-size: 1.2em;
+    font-weight: bolder;
+}
+
+.product-grid .product .info-product .description {
+    text-align: justify;
+    font-size: clamp(0.7em, 1rem + 0.6vw, 1.1em);
+}
+
+.product-grid .product .info-product button {
+    height: 60px;
+    width: 185px;
+    align-self: center;
     border-radius: 10px;
     border: none;
     background: linear-gradient(45deg, var(--blue), var(--specialBlue));
@@ -363,14 +358,15 @@ main {
     font-weight: bold;
     cursor: pointer;
     font-size: 1em;
+    margin-top: 5px;
 }
 
-.featured-products button:hover {
+.product-grid .product .info-product button:hover {
     background: linear-gradient(45deg, var(--blue), var(--specialDarkBlue));
     box-shadow: 0 0 20px var(--black);
 }
 
-.featured-products button a {
+.product-grid .product .info-product button a {
     text-decoration: none;
     color: var(--white);
 }
@@ -460,11 +456,6 @@ main {
     fill: white !important;
 }
 
-@media (width : 800px) {
-
-    /*-------------------------Main: featured-products --------------------------*/
-
-}
 
 @media (width > 900px) {
     /*-------------------------Main: Header--------------------------*/
@@ -555,27 +546,6 @@ main {
         display: none;
     }
 
-    /*-------------------------Main: featured-products --------------------------*/
-
-
-    .featured-products .product-grid {
-        max-width: 60%;
-        margin: auto 0;
-    }
-
-    .featured-products .product {
-        height: 300px;
-    }
-
-    .featured-products .product img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .featured-products button {
-        margin-bottom: 20px;
-    }
 
     /*-------------------------Main: footer--------------------------*/
     #footer-container {

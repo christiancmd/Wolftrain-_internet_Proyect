@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+echo "hola admin";
+
 if (!isset($_SESSION['usuario'])) {
     echo
         '

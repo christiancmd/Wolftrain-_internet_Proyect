@@ -1,8 +1,10 @@
 <?php
+
 declare(strict_types=1);
 require_once '../php/config.php';
-
 include '../php/conection_db.php';
+
+define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
 
 
 function getArrayData(string $filename)
@@ -15,23 +17,56 @@ function getArrayData(string $filename)
 $arrayData = getArrayData(filename: "../php/arrayData.json");
 
 
+$id = isset($_GET['id']) ? $_GET['id'] : '';
+$token = isset($_GET['token']) ? $_GET['token'] : '';
 
-$sql = "SELECT IDservices, Name_services, Price, Megas FROM servicios Where Availability = 1";
-$result_services = $conexion->query(query: $sql);
 
-$i = 0;
 
-if ($result_services->num_rows > 0) {
-    while ($row = $result_services->fetch_assoc()) {
-        $i += 1;
-        $data[$i] = $row;
+
+if ($id == '' || $token == '') {
+    echo '
+        <script>
+            alert("No se ha podido obtener el id o el token");
+            window.location = "home.php";
+        </script>
+    ';
+    exit;
+} else {
+    $token_tmp = hash_hmac(algo: 'sha1', data: $id, key: KEY_TOKEN);
+    if ($token_tmp == $token) {
+
+        $sql = "SELECT IDservices, Name_services, Price, Megas, Description FROM servicios WHERE IDservices = $id AND Availability = 1";
+        $result_services = $conexion->query(query: $sql);
+
+        $i = 0;
+
+        if ($result_services->num_rows > 0) {
+            while ($row = $result_services->fetch_assoc()) {
+                $i += 1;
+                $data[$i] = $row;
+            }
+
+        }
+
+
+    } else {
+        echo '
+            <script>
+                alert("Error de proceso");
+                window.location = "home.php";
+            </script>
+                ';
+        exit;
     }
 }
 
-echo "Hola";
+function createJsonFile($row): void
+{
+    file_put_contents(filename: '../php/arrayServices.json', data: json_encode(value: $row));
+}
 
-define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
 
+createJsonFile(row: $data);
 
 session_start();
 
@@ -55,6 +90,8 @@ session_destroy();
 
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -62,11 +99,12 @@ session_destroy();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Tienda Online</title>
-    <link rel="stylesheet" href="../style/home.css">
+    <link rel="stylesheet" href="../style/details.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body>
+
     <!-- HEADER -->
     <header id="header-container">
         <div class="header-box">
@@ -152,38 +190,39 @@ session_destroy();
         <div class="progress"></div>
     </header>
 
+
+
     <main>
 
+        <section class="product-grid">
+            <?php foreach ($data as $key) { ?>
+                <div class="product">
+                    <?php
+                    $services = "../img/home-php/" . $key['Name_services'] . "_url.jpg";
+                    ?>
 
-        <section class="featured-products">
-            <h3>Productos Destacados</h3>
+                    <figure>
+                        <img src="<?= $services ?>" alt="Plan de Wifi">
+                    </figure>
 
-            <div class="product-grid">
-
-                <!-- php-->
-                <?php
-                foreach ($data as $key) { ?>
-                    <div class="product">
-                        <figure>
-                            <?php
-                            $services = "../img/home-php/" . $key['Name_services'] . "_url.jpg";
-                            ?>
-                            <img src="<?= $services ?>" alt="Servicio">
-                        </figure>
-                        <div>
-                            <h3><?= "Plan " . $key['Name_services'] ?></h3>
-                            <p><?= $key['Megas'] . " Megas" ?></p>
-                            <p><?= "$" . number_format(num: (int) $key['Price'], decimals: 2, decimal_separator: '.', thousands_separator: ',') ?>
+                    <div class="info-product">
+                        <div class="principal-info-product">
+                            <h2> <?= $key['Name_services'] ?></h2>
+                            <p> <?= "$" . number_format(
+                                num: (int) $key['Price'],
+                                decimals: 2,
+                                decimal_separator: '.',
+                                thousands_separator: ','
+                            ) ?>
                             </p>
-                            <button><a
-                                    href="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: $key["IDservices"], key: KEY_TOKEN); ?>">Detalles</a></button>
                         </div>
+                        <small class="description"><?= $key['Description'] ?></small>
+                        <button><a href="../pdf/document.php" download="Solicitud de Adquisición">Adquirir Comprobante de
+                                servicio</a></button>
                     </div>
-                <?php } ?>
 
-                <!-- php-->
-            </div>
-
+                </div>
+            <?php } ?>
 
 
         </section>
@@ -237,7 +276,6 @@ session_destroy();
                 </div>
             </div>
         </div>
-
     </footer>
 
     <script src="../app/actionNav.js"></script>

@@ -25,10 +25,17 @@ if (mysqli_num_rows(result: $validar_login) > 0) {
     $result = $conn->query(query: $sql);
 
 
+
+    function createJsonFile($row): void
+    {
+        file_put_contents(filename: 'arrayData.json', data: json_encode(value: $row));
+    }
+
     if ($result->num_rows > 0) {
 
         while ($row = $result->fetch_assoc()) {
-            file_put_contents(filename: 'arrayData.json', data: json_encode(value: $row));
+
+            createJsonFile(row: $row);
 
             if ($row["rol_id"] == 1) {
                 header(header: "location: ../pages/adminHome.php");
