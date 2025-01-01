@@ -10,7 +10,6 @@ body {
     min-height: 100dvh;
     grid-template-rows: auto 1fr auto;
     width: 100%;
-    background-image: url(../img/about-us-img/background-white.jpg);
     background-position: center;
     background-size: cover;
 }
@@ -274,14 +273,22 @@ html {
 }
 
 
+.dark-mode {
+    filter: brightness(50%);
+
+}
+
 
 /*-----------------------main ------------------------------*/
 
 main {
     width: 100%;
     height: auto;
-    top: 120px;
+    top: 100px;
+    padding-top: 30px;
     position: relative;
+    background-image: url(../img/about-us-img/background-white.jpg);
+
 }
 
 
@@ -456,6 +463,38 @@ main {
     fill: white !important;
 }
 
+
+@media (width > 1000px) {
+
+    /*-------------------------Main: Header--------------------------*/
+
+    .data-user h4 {
+        font-size: 1.2em;
+    }
+
+    .data-user p {
+        font-size: 1em;
+    }
+
+    .ul-list-mobile {
+        width: 380px !important;
+        align-items: normal;
+    }
+
+
+
+    .ul-list-mobile .grid-brands-container .div-grid span {
+        font-size: .8em;
+        font-weight: bold;
+    }
+
+    .action-nav {
+        right: 0% !important;
+    }
+
+
+
+}
 
 @media (width > 900px) {
     /*-------------------------Main: Header--------------------------*/

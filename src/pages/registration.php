@@ -136,7 +136,7 @@
                             <label class="label" for="password">Contraseña</label>
                         </div>
 
-                        <button type="submit" id="button-register">Iniciar Sesion</button>
+                        <button type="submit" class="button-register">Iniciar Sesion</button>
                     </form>
 
                     <p id="b-login">No tienes una cuenta?</p>
@@ -212,7 +212,7 @@
                             <label class="label" for="password">Contraseña</label>
                         </div>
 
-                        <button type="submit" id="button-register">Registrarse</button>
+                        <button type="submit" class="button-register">Registrarse</button>
                     </form>
 
                     <p id="b-register">Ya tienes una cuenta?</p>
@@ -266,7 +266,7 @@
 
 
     <script src="../app/register.js"></script>
-    <script src="../app/actionNav.js"></script>
+    <script src="../app/actionNavNormal.js"></script>
 </body>
 
 </html>

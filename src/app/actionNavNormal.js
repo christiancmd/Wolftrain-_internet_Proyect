@@ -1,20 +1,12 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-/*Button active-nav-mobile */
-
 const activeNavMobileButton = document.querySelector('#active-nav-button');
 const navigator = document.querySelector('.ul-list-mobile');
-const sectionPrincipal = document.querySelector('.featured-products');
-
-
 
 
 const actionNavMobile = () => {
-    sectionPrincipal.classList.remove('dark-mode');
     navigator.classList.toggle('action-nav');
 }
 
 function activeNavMobile(e) {
-    sectionPrincipal.classList.add('dark-mode');
     navigator.classList.toggle('action-nav');
 
     // actionNavMobile();

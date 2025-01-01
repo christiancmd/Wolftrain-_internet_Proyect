@@ -6,7 +6,6 @@ include '../php/conection_db.php';
 
 define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
 
-
 function getArrayData(string $filename)
 {
     $jsonData = file_get_contents(filename: $filename);
@@ -16,12 +15,8 @@ function getArrayData(string $filename)
 
 $arrayData = getArrayData(filename: "../php/arrayData.json");
 
-
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 $token = isset($_GET['token']) ? $_GET['token'] : '';
-
-
-
 
 if ($id == '' || $token == '') {
     echo '
@@ -45,9 +40,7 @@ if ($id == '' || $token == '') {
                 $i += 1;
                 $data[$i] = $row;
             }
-
         }
-
 
     } else {
         echo '
@@ -65,11 +58,28 @@ function createJsonFile($row): void
     file_put_contents(filename: '../php/arrayServices.json', data: json_encode(value: $row));
 }
 
+function servicesGroup($conexion)
+{
+    $sql = "SELECT IDservices, Name_services FROM servicios Where Availability = 1";
+    $result_services = $conexion->query(query: $sql);
+
+    $i = 0;
+
+    if ($result_services->num_rows > 0) {
+        while ($row = $result_services->fetch_assoc()) {
+            $i += 1;
+            $name_services[$i] = $row;
+        }
+    }
+    return $name_services;
+}
+
+$services = servicesGroup(conexion: $conexion); // Array de servicios, solamente id y nombre
+
 
 createJsonFile(row: $data);
 
 session_start();
-
 
 /*                          Al termirnar quitar los comentarios
 
@@ -85,13 +95,9 @@ if (!isset($_SESSION['usuario'])) {
     die();
 }
     */
-
 session_destroy();
 
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -104,13 +110,12 @@ session_destroy();
 </head>
 
 <body>
-
     <!-- HEADER -->
     <header id="header-container">
         <div class="header-box">
             <div class="title">
                 <img src="../../public/Logo.jpg" alt="Our icon">
-                <h1><a href="index.html">WolfTrain</a></h1>
+                <h1><a href="home.php">WolfTrain</a></h1>
             </div>
             <nav class="navegator-box">
 
@@ -151,26 +156,19 @@ session_destroy();
                     gradientUnits="userSpaceOnUse"><stop offset=".304" stop-color="#ff9fb2"/><stop offset="1" stop-color="#f97dbd"/></linearGradient></defs></g></svg>
                     '; ?>
 
-                        <article class="div-grid" id="first-article">
+                        <?php foreach ($services as $key) { ?>
+                            <article class="div-grid"
+                                id="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: $key["IDservices"], key: KEY_TOKEN); ?>">
+                                <?= $icon_svg ?>
+                                <span> <?= "Plan " . $key["Name_services"]; ?> </span>
+                            </article>
+                        <?php } ?>
 
-                            <?= $icon_svg ?>
-                            <span>Articulo</span>
+                        <article class="div-grid" id="home-index">
+                            <?= $icon_svg ?> <!--  CAMBIAR ICONO -->
+                            <span> <?= "Home" ?> </span>
                         </article>
-                        <article class="div-grid" id="second-article">
 
-                            <?= $icon_svg ?>
-                            <span>Articulo</span>
-                        </article>
-                        <article class="div-grid" id="third-article">
-
-                            <?= $icon_svg ?>
-                            <span>Articulo</span>
-                        </article>
-                        <article class="div-grid" id="fourth-article">
-
-                            <?= $icon_svg ?>
-                            <span>Articulo</span>
-                        </article>
 
                     </div>
                     <!-- php-->
@@ -189,12 +187,9 @@ session_destroy();
         </div>
         <div class="progress"></div>
     </header>
+    <main class="featured-products">
 
-
-
-    <main>
-
-        <section class="product-grid">
+        <section class="product-grid ">
             <?php foreach ($data as $key) { ?>
                 <div class="product">
                     <?php
@@ -217,18 +212,14 @@ session_destroy();
                             </p>
                         </div>
                         <small class="description"><?= $key['Description'] ?></small>
-                        <button><a href="../pdf/document.php" download="Solicitud de Adquisición">Adquirir Comprobante de
+                        <button><a href="../pdf/document.php" target="_blank">Adquirir Comprobante de
                                 servicio</a></button>
                     </div>
 
                 </div>
             <?php } ?>
-
-
         </section>
-
     </main>
-
 
     <!-- FOOTER -->
 

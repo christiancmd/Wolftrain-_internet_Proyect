@@ -199,7 +199,7 @@ html {
 .ul-list-mobile .grid-brands-container .div-grid {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
     height: 75px;
     border-radius: 5px;
@@ -208,6 +208,7 @@ html {
     background-color: var(--whiteOpacity);
     gap: 12px;
     cursor: pointer;
+    padding-left: 15px;
 }
 
 .ul-list-mobile .grid-brands-container .div-grid:hover {
@@ -247,6 +248,11 @@ html {
 .header-box .navegator-box .ul-list-mobile button a {
     text-decoration: none;
     color: var(--white);
+}
+
+.dark-mode {
+    filter: brightness(50%);
+
 }
 
 #header-container .progress {
@@ -460,9 +466,35 @@ main {
     fill: white !important;
 }
 
-@media (width : 800px) {
+@media (width > 1000px) {
 
-    /*-------------------------Main: featured-products --------------------------*/
+    /*-------------------------Main: Header--------------------------*/
+
+    .data-user h4 {
+        font-size: 1.2em;
+    }
+
+    .data-user p {
+        font-size: 1em;
+    }
+
+    .ul-list-mobile {
+        width: 380px !important;
+        align-items: normal;
+    }
+
+
+
+    .ul-list-mobile .grid-brands-container .div-grid span {
+        font-size: .8em;
+        font-weight: bold;
+    }
+
+    .action-nav {
+        right: 0% !important;
+    }
+
+
 
 }
 

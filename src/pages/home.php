@@ -28,8 +28,6 @@ if ($result_services->num_rows > 0) {
     }
 }
 
-echo "Hola";
-
 define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
 
 
@@ -72,7 +70,7 @@ session_destroy();
         <div class="header-box">
             <div class="title">
                 <img src="../../public/Logo.jpg" alt="Our icon">
-                <h1><a href="index.html">WolfTrain</a></h1>
+                <h1><a href="../../index.html">WolfTrain</a></h1>
             </div>
             <nav class="navegator-box">
 
@@ -113,25 +111,17 @@ session_destroy();
                     gradientUnits="userSpaceOnUse"><stop offset=".304" stop-color="#ff9fb2"/><stop offset="1" stop-color="#f97dbd"/></linearGradient></defs></g></svg>
                     '; ?>
 
-                        <article class="div-grid" id="first-article">
+                        <?php foreach ($data as $key) { ?>
+                            <article class="div-grid"
+                                id="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: $key["IDservices"], key: KEY_TOKEN); ?>">
+                                <?= $icon_svg ?>
+                                <span> <?= "Plan " . $key["Name_services"]; ?> </span>
+                            </article>
+                        <?php } ?>
 
-                            <?= $icon_svg ?>
-                            <span>Articulo</span>
-                        </article>
-                        <article class="div-grid" id="second-article">
-
-                            <?= $icon_svg ?>
-                            <span>Articulo</span>
-                        </article>
-                        <article class="div-grid" id="third-article">
-
-                            <?= $icon_svg ?>
-                            <span>Articulo</span>
-                        </article>
-                        <article class="div-grid" id="fourth-article">
-
-                            <?= $icon_svg ?>
-                            <span>Articulo</span>
+                        <article class="div-grid" id="home-index">
+                            <?= $icon_svg ?> <!--  CAMBIAR ICONO -->
+                            <span> <?= "Home" ?> </span>
                         </article>
 
                     </div>
@@ -175,8 +165,15 @@ session_destroy();
                             <p><?= $key['Megas'] . " Megas" ?></p>
                             <p><?= "$" . number_format(num: (int) $key['Price'], decimals: 2, decimal_separator: '.', thousands_separator: ',') ?>
                             </p>
-                            <button><a
-                                    href="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: $key["IDservices"], key: KEY_TOKEN); ?>">Detalles</a></button>
+
+                            <button>
+
+                                <a href="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: $key["IDservices"], key: KEY_TOKEN); ?>
+                                    ">Detalles
+                                </a>
+
+
+                            </button>
                         </div>
                     </div>
                 <?php } ?>
@@ -242,6 +239,7 @@ session_destroy();
 
     <script src="../app/actionNav.js"></script>
     <script src="../app/handleAction.js"></script>
+
 </body>
 
 </html>

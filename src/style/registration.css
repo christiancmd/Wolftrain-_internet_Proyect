@@ -278,7 +278,7 @@ form {
     text-shadow: 0px 0px 10px #000000;
 }
 
-form #button-register {
+form .button-register {
     align-self: center;
     height: 45px;
     width: 125px;
@@ -291,7 +291,7 @@ form #button-register {
     font-size: 1em;
 }
 
-form #button-register:hover {
+form .button-register:hover {
     background: linear-gradient(45deg, var(--blue), var(--specialDarkBlue));
     box-shadow: 0 0 20px var(--black);
 }
