@@ -34,7 +34,7 @@ define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
 session_start();
 
 
-/*                          Al termirnar quitar los comentarios
+
 
 if (!isset($_SESSION['usuario'])) {
     echo
@@ -47,7 +47,7 @@ if (!isset($_SESSION['usuario'])) {
     session_destroy();
     die();
 }
-    */
+
 
 session_destroy();
 

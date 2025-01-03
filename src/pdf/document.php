@@ -75,7 +75,7 @@ $fpdf->Cell(w: 195, h: 15, txt: convert_String(string: 'Comprobante de Adquisici
 
 $fpdf->Ln(h: 20); //Salto de linea
 
-$loremText = "  Yo, " . $arrayData['Full_name'] . ", estoy de acuerdo con los siguientes requerimientos y términos para la adquisición del servicio de internet ofrecido por la empresa de Wolftrain. Que conlleva la necesaria asistencia personal a la sede principal de Wolftrain ubicada en Maracay, Av.Bolivar-La Barraca h5. Para confirmar los datos necesarios y firmar los documentos pertinentes y recibir el equipo necesario para la instalación. La asistencia a la sede de la empresa garantiza que se cumplan todos los procedimientos de verificación y activación del servicio de manera adecuada.";
+$loremText = "  Yo, " . $arrayData['Full_name'] . ", estoy de acuerdo con los siguientes requerimientos y términos para la adquisición del servicio de internet ofrecido por la empresa de Wolftrain. Que conlleva la necesaria asistencia personal a la sede principal de Wolftrain ubicada en Maracay, Av.Bolivar-La Barraca h5. Para confirmar los datos necesarios, firmar los documentos pertinentes y recibir el equipo necesario para la instalación. La asistencia a la sede de la empresa garantiza que se cumplan todos los procedimientos de verificación y activación del servicio de manera adecuada.";
 $fpdf->SetFont(family: 'Arial', style: 'B', size: 10);
 $fpdf->MultiCell(w: 195, h: 7, txt: convert_String($loremText), border: 0, align: 'J');
 
