@@ -34,7 +34,7 @@ html {
     --DarkDiferentBlue: #014c4a;
     --whiteOpacity: #ffffff41;
     --whiteOpacityLess: #ffffff80;
-
+    --yellow: #b5b50c;
 }
 
 
@@ -194,6 +194,7 @@ html {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     margin-top: 25px;
+
 }
 
 .ul-list-mobile .grid-brands-container .div-grid {
@@ -209,6 +210,7 @@ html {
     gap: 12px;
     cursor: pointer;
     padding-left: 15px;
+
 }
 
 .ul-list-mobile .grid-brands-container .div-grid:hover {
@@ -282,6 +284,245 @@ html {
 }
 
 
+/*-----------------------main: modales ------------------------------*/
+
+
+/* Estilos para el modal general */
+#modal-delete {
+    display: none;
+}
+
+#modal-update {
+    display: none;
+
+}
+
+#modal-create {
+    display: none;
+}
+
+.modal {
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: var(--blackOpacity);
+}
+
+.modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 25px;
+    background-color: var(--white);
+    margin: 30% auto;
+    padding: 20px;
+    border: 1px solid var(--gray);
+    width: 350px;
+    height: auto;
+    padding: 65px 0;
+    border-radius: 10px;
+}
+
+.container-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* -------------------Estilos para el modal Delete ------------------------------*/
+
+.modal .modal-content img {
+    width: 100px;
+}
+
+.modal .button-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.modal .button-content h2 {
+    font-size: clamp(1.2em, 2.5vw, 1.4em);
+}
+
+.modal .button-content button {
+    background: linear-gradient(45deg, var(--blue), var(--specialBlue));
+    display: flex;
+    width: 200px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 10px;
+    transition: box-shadow 0.2s ease-in;
+    border: none;
+    font-size: clamp(.9em, 2.5vw, 1.1em);
+    font-weight: bold;
+    cursor: pointer;
+
+}
+
+.modal .button-content button:hover {
+    box-shadow: 0 0 10px var(--black);
+}
+
+/* --------------------------Estilos para el modal Update---------------------------------- */
+
+
+.modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: relative;
+}
+
+.modal form .content-button {
+    display: flex;
+    gap: 5px;
+}
+
+.modal form .button-update {
+    align-self: center;
+    height: 45px;
+    width: 125px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(45deg, var(--blue), var(--specialBlue));
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.modal form .button-update:hover {
+    background: linear-gradient(45deg, var(--blue), var(--specialDarkBlue));
+    box-shadow: 0 0 20px var(--black);
+}
+
+.modal form .no-update-button {
+    align-self: center;
+    height: 45px;
+    width: 125px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(45deg, var(--blue), var(--specialBlue));
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.modal form .no-update-button:hover {
+    background: linear-gradient(45deg, var(--blue), var(--specialDarkBlue));
+    box-shadow: 0 0 20px var(--black);
+}
+
+
+.input-group {
+    /*update and create*/
+    font-size: 1.2em;
+    position: relative;
+}
+
+textarea {
+    overflow-y: hidden;
+    overflow-x: scroll;
+    height: 55px !important;
+}
+
+.select {
+    align-self: center;
+    width: 150px;
+    border: 1px solid blue;
+    height: 25px !important;
+    border-radius: 5px;
+    box-shadow: 0 0 5px black;
+    margin-bottom: 10px;
+
+}
+
+.input-group .input,
+.input-group textarea {
+    all: unset;
+    font-size: .8em;
+    padding: 6px;
+    width: 250px;
+    height: 35px;
+    border: 2px solid var(--specialDarkBlue);
+    border-radius: 16px;
+    transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: none;
+}
+
+.input-group .label {
+    font-size: .8em;
+    position: absolute;
+    top: 16px;
+    left: 10px;
+    color: var(--black);
+    pointer-events: none;
+    transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: .9;
+}
+
+.input:focus,
+textarea:focus {
+    border: 1px solid var(--SuperDarkBlue);
+    background-color: wheat;
+}
+
+
+.input:is(:focus, :valid)~label,
+textarea:is(:focus, :valid)~label {
+    transform:
+        translateY(-180%) scale(0.7);
+    padding-inline: 5px;
+    color: var(--black);
+}
+
+.box-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* --------------------------Estilos para el modal Update---------------------------------- */
+
+.modal form .button-register,
+.modal form .no-button-register {
+    align-self: center;
+    height: 45px;
+    width: 125px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(45deg, var(--blue), var(--specialBlue));
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.modal form .button-register:hover,
+.modal form .no-button-register:hover {
+    background: linear-gradient(45deg, var(--blue), var(--specialDarkBlue));
+    box-shadow: 0 0 20px var(--black);
+}
+
+
+
+
+
 
 /*-----------------------main ------------------------------*/
 
@@ -291,121 +532,139 @@ main {
     top: 100px;
     position: relative;
     background-color: var(--gray);
+    z-index: 0;
 }
 
-/*-----------------------main: hero------------------------------*/
+/*-----------------------main: hero ------------------------------*/
 
 #hero {
-    width: 100%;
-    height: 100%;
-    padding: 25px 20px 125px 20px;
-}
-
-.container-hero {
     position: relative;
     width: 100%;
+    height: auto;
+    padding: 25px 0px 150px 0px;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
+    gap: 25px;
+    z-index: 0;
+}
+
+#hero h2 {
+    font-size: clamp(1.6rem, 2.5vw, 2rem);
+    width: 400px;
     text-align: center;
-    flex-wrap: nowrap;
+}
+
+.principal-container-services {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 25px;
 }
 
-.container-hero .hero-content {
+.button-create-services {
     width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 15px;
 }
 
-
-.container-hero .hero-content h2 {
-    font-size: clamp(1.8rem, 2.5vw, 2.2rem);
-    /*Funciona*/
-}
-
-.container-hero .hero-content p {
-    font-size: clamp(1rem, 2.5vw, 1.3rem);
-    max-width: 660px;
-    line-height: 25px;
-}
-
-.hero-articles {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.hero-articles .articles-content {
-    height: 400px;
-    width: 300px;
-    background-color: var(--whiteOpacityLess);
-    border: .2px solid var(--dark-gray);
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 10px;
-    box-shadow: 0 0 10px var(--blackOpacity);
-}
-
-.hero-articles .articles-content header {
-    width: 100%;
-    height: 50%;
-    border-radius: 15px;
-}
-
-.hero-articles .articles-content header img {
-    width: 100%;
-    height: 100%;
-    border-radius: 15px;
-    object-fit: cover;
-}
-
-.hero-articles .articles-content .content {
-    padding: 0 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.hero-articles .articles-content .content h3 {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: var(--black);
-}
-
-.hero-articles .articles-content .content p {
-    font-size: 1em;
-    color: var(--blackOpacity);
-}
-
-.hero-articles .articles-content .content button {
-    width: 140px;
-    height: 40px;
-    align-self: center;
-    margin-top: 15px;
-    border-radius: 10px;
-    border: none;
+.principal-container-services .btn-register {
     background: linear-gradient(45deg, var(--blue), var(--specialBlue));
-    cursor: pointer;
-    transition: all .19s ease-in;
-    color: var(--white);
+}
+
+.principal-container-services .btn-createDocument {
+    background: linear-gradient(45deg, var(--DarkDiferentBlue), var(--specialBlue));
+}
+
+:is(.btn-register, .btn-createDocument) {
+    display: flex;
+    width: 200px !important;
+    align-items: center;
+    gap: 5px;
     text-decoration: none;
-    font-weight: bold;
+    color: var(--white);
+    border-radius: 10px;
+    padding: 0 15px;
+    height: 40px;
+    transition: box-shadow 0.2s ease-in;
 }
 
-.hero-articles .articles-content .content button:hover {
-    background: linear-gradient(45deg, var(--blue), var(--specialDarkBlue));
-    box-shadow: 0 0 20px var(--black);
+:is(.btn-register, .btn-createDocument):hover {
+    box-shadow: 0 0 10px var(--black);
 }
 
 
+
+table {
+    border: 2px solid var(--black);
+    width: 90%;
+}
+
+thead {
+    border: 2px solid var(--black);
+}
+
+th,
+td {
+    border: 1px solid var(--black);
+    padding: 24px 8px;
+    max-width: 600px;
+    font-size: clamp(.85em, 2.5vw, 1em);
+
+}
+
+
+th {
+    background: linear-gradient(45deg, var(--specialDarkBlue), var(--specialBlue));
+    color: var(--white);
+    text-align: left;
+}
+
+
+
+tr:hover {
+    background: linear-gradient(45deg, var(--specialSuperBlue), var(--specialBlue));
+    color: var(--white);
+}
+
+
+:is(.btn-edit, .btn-delete) {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 5px;
+    transition: box-shadow 0.3s ease-in;
+}
+
+:is(.btn-edit, .btn-delete):hover {
+    box-shadow: 0 0 10px var(--black);
+}
+
+.btn-edit {
+    background-color: var(--yellow);
+    color: var(--white);
+
+}
+
+.btn-delete {
+    background-color: var(--red);
+    color: var(--white);
+
+}
+
+.action-config {
+    width: auto;
+
+}
 
 
 /*-----------------------footer ------------------------------*/
@@ -416,6 +675,7 @@ main {
     padding: 40px 25px;
     background: linear-gradient(45deg, var(--DiferentBlue), var(--specialDarkBlue));
     z-index: 0;
+    position: relative;
 }
 
 .footer-box .footer-box-content {
@@ -492,6 +752,18 @@ main {
 .footer-box .copy .social-icon svg:hover {
     fill: white !important;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -649,14 +921,80 @@ main {
     }
 */
 
+    /*-------------------------Main: modal--------------------------*/
+
+    .container-form {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .modal .modal-content {
+        margin: 7% auto;
+        width: 40%;
+        height: auto;
+    }
+
+    .modal form {
+        flex-direction: column;
+    }
+
+    .box-input {
+        gap: 15px;
+    }
+
+
+    textarea {
+        height: 100px !important;
+    }
+
+
+
     /*-------------------------Main: Hero--------------------------*/
 
     #hero {
-        height: 100vh;
+        height: auto;
+        padding-bottom: 200px;
     }
 
-    .hero-articles {
+    #hero h2 {
+        width: 600px;
+    }
+
+    .button-create-services {
         flex-direction: row;
+        justify-content: center;
+    }
+
+    :is(.btn-register, .btn-createDocument) {
+        width: 230px;
+        height: 60px;
+    }
+
+    :is(.btn-edit, .btn-delete) {
+        display: flex;
+        flex-direction: row;
+        width: 75px;
+        height: 52px;
+        align-self: center;
+        font-size: .8em;
+    }
+
+    :is(.btn-edit, .btn-delete) svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    td {
+        padding: 10px 5px !important;
+
+    }
+
+    .action-config {
+        width: auto;
+        position: relative;
+        display: flex;
+        gap: 15px;
+
     }
 
 

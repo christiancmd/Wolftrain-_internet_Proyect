@@ -1,28 +1,28 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 /*Button active-nav-mobile */
 
-const activeNavMobileButton = document.querySelector('#active-nav-button');
+const active_nav_mobile_button = document.querySelector('#active-nav-button');
 const navigator = document.querySelector('.ul-list-mobile');
-const sectionPrincipal = document.querySelector('.featured-products');
+const section_principal = document.querySelector('.featured-products');
 
 
 
 
-const actionNavMobile = () => {
-    sectionPrincipal.classList.remove('dark-mode');
+const action_nav_Mobile = () => {
+    section_principal.classList.remove('dark-mode');
     navigator.classList.toggle('action-nav');
 }
 
-function activeNavMobile(e) {
-    sectionPrincipal.classList.add('dark-mode');
+function active_nav_mobile(e) {
+    section_principal.classList.add('dark-mode');
     navigator.classList.toggle('action-nav');
 
     // actionNavMobile();
-    const closeButton = document.querySelector('#icon-close');
-    closeButton.addEventListener('click', actionNavMobile);
+    const close_button = document.querySelector('#icon-close');
+    close_button.addEventListener('click', action_nav_Mobile);
 }
 
-const handleResize = () => {
+const handle_resize = () => {
     if (navigator.id !== 'nav-php') {
         if (window.innerWidth > 1000) {
             navigator.classList.remove('ul-list-mobile');
@@ -36,6 +36,6 @@ const handleResize = () => {
     }
 }
 
-activeNavMobileButton.addEventListener('click', activeNavMobile);
-window.addEventListener('resize', handleResize);
-window.addEventListener('load', handleResize);
+active_nav_mobile_button.addEventListener('click', active_nav_mobile);
+window.addEventListener('resize', handle_resize);
+window.addEventListener('load', handle_resize);

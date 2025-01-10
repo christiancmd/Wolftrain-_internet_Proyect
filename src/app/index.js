@@ -2,8 +2,8 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 /*Button hero */
 
-const buttonHero = document.querySelector('#button-hero');
-const inputPrincipal = document.querySelector('#input-principal')
+const button_hero = document.querySelector('#button-hero');
+const input_principal = document.querySelector('#input-principal')
 
 
 function alertText() {
@@ -11,9 +11,12 @@ function alertText() {
 }
 
 function alertHero(e) {
-    if (inputPrincipal.value) {
-        inputPrincipal.value = '';
+    if (input_principal.value) {
+        input_principal.value = '';
         alertText();
     }
 }
-buttonHero.addEventListener('click', alertHero);
+button_hero.addEventListener('click', alertHero);
+
+
+

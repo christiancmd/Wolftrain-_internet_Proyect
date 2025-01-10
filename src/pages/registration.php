@@ -43,7 +43,7 @@
                 <ul class="ul-list-mobile">
                     <img id="icon-close" src="../img/icon-nav/close.png" alt="">
                     <li><a href="../../index.html">Inicio</a></li>
-                    <li><a href="registration.html">Registrarse</a></li>
+                    <li><a href="registration.php">Registrarse</a></li>
                     <li><a href="aboutUs.html">Sobre Nosotros</a></li>
                     <li><a href="services.html">Servicios</a></li>
                 </ul>

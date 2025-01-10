@@ -1,8 +1,8 @@
-const activeNavMobileButton = document.querySelector('#active-nav-button');
+const active_nav_mobile_button = document.querySelector('#active-nav-button');
 const navigator = document.querySelector('.ul-list-mobile');
 
 
-const actionNavMobile = () => {
+const action_nav_mobile = () => {
     navigator.classList.toggle('action-nav');
 }
 
@@ -10,8 +10,8 @@ function activeNavMobile(e) {
     navigator.classList.toggle('action-nav');
 
     // actionNavMobile();
-    const closeButton = document.querySelector('#icon-close');
-    closeButton.addEventListener('click', actionNavMobile);
+    const close_button = document.querySelector('#icon-close');
+    close_button.addEventListener('click', action_nav_mobile);
 }
 
 const handleResize = () => {
@@ -28,6 +28,6 @@ const handleResize = () => {
     }
 }
 
-activeNavMobileButton.addEventListener('click', activeNavMobile);
+active_nav_mobile_button.addEventListener('click', activeNavMobile);
 window.addEventListener('resize', handleResize);
 window.addEventListener('load', handleResize);

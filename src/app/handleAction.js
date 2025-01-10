@@ -1,12 +1,20 @@
 const store_boxes = Array.from(document.querySelectorAll('.div-grid'));
 
+function recognize_button(e) {
+    let detectID = e.target.id;
+    console.log(detectID);
+
+    if (detectID === "services-section") {
+        window.location.href = "../pages/dashboardServices.php";
+    } else if (detectID === "user-section") {
+        window.location.href = "../pages/dashboardClient.php";
+    } else if (detectID === "home-index") {
+        window.location.href = "../../index.html";
+    } else if (detectID === "register-section") {
+        window.location.href = "../pages/registration.php";
+    }
+}
+
 for (const box_services of store_boxes) {
-    box_services.addEventListener('click', (e) => {
-        if (e.target.id !== 'home-index') {
-            const url = "http://localhost/Wolftrain-internet-Proyecto/src/pages/" + e.target.id;
-            window.location.href = url;
-        } else {
-            window.location.href = "http://localhost/Wolftrain-internet-Proyecto/index.html";
-        }
-    });
+    box_services.addEventListener('click', recognize_button);
 }

@@ -84,10 +84,10 @@ session_destroy();
 
                             <div class="data-user">
                                 <h4>
-                                    <?= $arrayData['Full_name'] ?>
+                                    Admin
                                 </h4>
                                 <p>
-                                    <?= $arrayData['Email'] ?>
+                                    admin@gmail.com
                                 </p>
                             </div>
                             <!-- php-->
@@ -109,17 +109,25 @@ session_destroy();
                     gradientUnits="userSpaceOnUse"><stop offset=".304" stop-color="#ff9fb2"/><stop offset="1" stop-color="#f97dbd"/></linearGradient></defs></g></svg>
                     '; ?>
 
-                        <?php foreach ($data as $key) { ?>
-                            <article class="div-grid"
-                                id="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: $key["IDservices"], key: KEY_TOKEN); ?>">
-                                <?= $icon_svg ?>
-                                <span> <?= "Plan " . $key["Name_services"]; ?> </span>
-                            </article>
-                        <?php } ?>
+
+                        <article class="div-grid" id="user-section">
+                            <?= $icon_svg ?>
+                            <span><a href="dashboardClient.php">Usuarios</a></span>
+                        </article>
+                        <article class="div-grid" id="services-section">
+                            <?= $icon_svg ?>
+                            <span><a href="dashboardServices.php">Servicios</a></span>
+                        </article>
+
+                        <article class="div-grid" id="register-section">
+                            <?= $icon_svg ?>
+                            <span><a href="registration.php">Registro</a></span>
+                        </article>
+
 
                         <article class="div-grid" id="home-index">
                             <?= $icon_svg ?> <!--  CAMBIAR ICONO -->
-                            <span> <?= "Home" ?> </span>
+                            <span><a href="../../index.html">Home</a></span>
                         </article>
 
                     </div>
@@ -142,8 +150,59 @@ session_destroy();
 
     <main>
 
+        <section id="hero">
+            <div class="container-hero">
+                <div class="hero-content">
+                    <h2>¡Bienvenido Admin!</h2>
+                    <p>En esta sección podrás gestionar todos los registros relacionados a tu tienda online
+                        <strong>Wolftrain</strong>
+                    </p>
+                </div>
+                <!-- <div class="edit-extra extra-three"></div>
+                <div class="edit-extra extra-four"></div> -->
+                <div class="hero-articles">
 
-        <h1>Hola christian</h1>
+                    <article class="articles-content">
+                        <header>
+                            <img src="../img/img-adminHome/config-user.png" alt="config-user">
+                        </header>
+
+                        <div class="content">
+                            <h3>Usuarios</h3>
+                            <p>En esta sección podrás visualizar los registros de los usuarios en
+                                tu tienda online</p>
+
+                            <button type="submit" id="button-user" class="btn-article"> Visualizar
+                            </button>
+                    </article>
+
+                    <article class="articles-content">
+                        <header>
+                            <img src="../img/img-adminHome/config-services.png" alt="config-services">
+                        </header>
+
+                        <div class="content">
+                            <h3>Servicios</h3>
+                            <p>En esta sección podrás visualizar los registros de los servicios en
+                                tu tienda online</p>
+                            <button type="submit" id="button-service" class="btn-article">
+                                Visualizar
+
+                            </button>
+
+                            <!-- <button type="submit" class="btn-article"><a href="users.php">Visualizar</a></button> -->
+                    </article>
+
+
+
+                </div>
+                <!-- <div class="edit-extra extra-five"></div>
+                <div class="edit-extra extra-six"></div> -->
+
+            </div>
+        </section>
+
+
     </main>
 
 
@@ -198,6 +257,8 @@ session_destroy();
 
     <script src="../app/actionNavNormal.js"></script>
     <script src="../app/handleAction.js"></script>
+    <script src="../app/directionLinkAdmin.js"></script>
+
 
 
 

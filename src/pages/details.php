@@ -160,7 +160,9 @@ session_destroy();
                             <article class="div-grid"
                                 id="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: $key["IDservices"], key: KEY_TOKEN); ?>">
                                 <?= $icon_svg ?>
-                                <span> <?= "Plan " . $key["Name_services"]; ?> </span>
+                                <span><a
+                                        href="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: $key["IDservices"], key: KEY_TOKEN); ?>">
+                                        <?= $key["Name_services"]; ?> </a> </span>
                             </article>
                         <?php } ?>
 
@@ -193,7 +195,15 @@ session_destroy();
             <?php foreach ($data as $key) { ?>
                 <div class="product">
                     <?php
-                    $services = "../img/home-php/" . $key['Name_services'] . "_url.jpg";
+                    $senteces = $key["Name_services"];
+                    $newSentence = str_replace(" ", "", $senteces);
+
+                    if (in_array($newSentence, haystack: ["PlanBronce", "PlanPlata", "PlanOro"])) {
+                        $services = "../img/home-php/" . $newSentence . "_url.jpg";
+                    } else {
+                        $services = "../img/home-php/unknow-info.webp";
+                    }
+
                     ?>
 
                     <figure>
@@ -212,7 +222,8 @@ session_destroy();
                             </p>
                         </div>
                         <small class="description"><?= $key['Description'] ?></small>
-                        <button><a href="../pdf/document.php" target="_blank">Adquirir Comprobante de
+                        <button class="<?= $key['Name_services'] ?>" id="button-service"><a href="../pdf/document.php"
+                                target="_blank" class="saveButton">Adquirir Comprobante de
                                 servicio</a></button>
                     </div>
 
@@ -268,9 +279,9 @@ session_destroy();
             </div>
         </div>
     </footer>
-
     <script src="../app/actionNav.js"></script>
     <script src="../app/handleAction.js"></script>
+
 </body>
 
 </html>

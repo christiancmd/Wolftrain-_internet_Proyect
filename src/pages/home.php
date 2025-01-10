@@ -30,7 +30,7 @@ if ($result_services->num_rows > 0) {
 
 define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
 
-
+/*
 session_start();
 
 
@@ -50,7 +50,7 @@ if (!isset($_SESSION['usuario'])) {
 
 
 session_destroy();
-
+*/
 ?>
 
 <!DOCTYPE html>
@@ -115,9 +115,13 @@ session_destroy();
                             <article class="div-grid"
                                 id="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: $key["IDservices"], key: KEY_TOKEN); ?>">
                                 <?= $icon_svg ?>
-                                <span> <?= "Plan " . $key["Name_services"]; ?> </span>
+                                <span><a
+                                        href="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: $key["IDservices"], key: KEY_TOKEN); ?>">
+                                        <?= $key["Name_services"]; ?> </a> </span>
                             </article>
                         <?php } ?>
+
+
 
                         <article class="div-grid" id="home-index">
                             <?= $icon_svg ?> <!--  CAMBIAR ICONO -->
@@ -156,12 +160,20 @@ session_destroy();
                     <div class="product">
                         <figure>
                             <?php
-                            $services = "../img/home-php/" . $key['Name_services'] . "_url.jpg";
+                            $senteces = $key["Name_services"];
+                            $newSentence = str_replace(" ", "", $senteces);
+
+                            if (in_array($newSentence, haystack: ["PlanBronce", "PlanPlata", "PlanOro"])) {
+                                $services = "../img/home-php/" . $newSentence . "_url.jpg";
+                            } else {
+                                $services = "../img/home-php/unknow-info.webp";
+                            }
+
                             ?>
                             <img src="<?= $services ?>" alt="Servicio">
                         </figure>
                         <div>
-                            <h3><?= "Plan " . $key['Name_services'] ?></h3>
+                            <h3><?= $key['Name_services'] ?></h3>
                             <p><?= $key['Megas'] . " Megas" ?></p>
                             <p><?= "$" . number_format(num: (int) $key['Price'], decimals: 2, decimal_separator: '.', thousands_separator: ',') ?>
                             </p>

@@ -35,11 +35,10 @@ if (mysqli_num_rows(result: $validar_login) > 0) {
 
         while ($row = $result->fetch_assoc()) {
 
-            createJsonFile(row: $row);
-
             if ($row["rol_id"] == 1) {
                 header(header: "location: ../pages/adminHome.php");
             } elseif ($row["rol_id"] == 2) {
+                createJsonFile(row: $row);
                 header(header: "location: ../pages/home.php");
             } else {
                 echo

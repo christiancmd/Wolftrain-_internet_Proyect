@@ -31,6 +31,35 @@ function getArrayData(string $filename): mixed ///Datos del usuario por json
 $arrayData = getArrayData(filename: "../php/arrayData.json");
 $arrayService = getArrayData(filename: "../php/arrayServices.json");
 
+foreach ($arrayService as $key) {
+    $service_plan = $key["Name_services"];
+}
+$id_user = $arrayData["IDuser"];
+
+function updateService($id, $service_plan, $conn): void
+{
+
+    // Verificar conexión 
+    if ($conn->connect_error) {
+        die("Conexión fallida: " . $conn->connect_error);
+    }
+
+    $sql = "UPDATE usuarios SET Service = ? WHERE IDuser = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("si", $service_plan, $id); /// actualizacion 
+    // Ejecutar la consulta 
+    if ($stmt->execute()) {
+        echo "Registro actualizado con éxito.";
+    } else {
+        echo "Error al actualizar el registro: " . $stmt->error;
+    } // Cerrar la conexión
+    $stmt->close();
+}
+updateService(id: $id_user, service_plan: $service_plan, conn: $conexion);
+$conexion->close();
+
+
+
 class pdf extends FPDF
 {
     public function header(): void
@@ -43,7 +72,7 @@ class pdf extends FPDF
         $this->SetFont(family: 'Arial', style: 'BI', size: 25);
         $this->Write(h: '22', txt: "Wolftrain");
 
-        $this->ln(h: 30);
+        $this->ln(h: 27);
     }
 
     public function Footer(): void
@@ -65,6 +94,16 @@ function convert_String($string): mixed
     $string = mb_convert_encoding(string: $string, to_encoding: 'ISO-8859-1', from_encoding: 'UTF-8');
     return $string;
 }
+
+function numeroAleatorio(): string
+{
+    // Genera un número aleatorio entre 1 y 1000 
+    $numero = mt_rand(1, 10000); // Formatea el número con ceros a la izquierda para que tenga 6 dígitos
+    return str_pad(string: $numero, length: 6, pad_string: '0', pad_type: STR_PAD_LEFT);
+}
+
+$ramdon = numeroAleatorio();
+
 
 $fpdf = new pdf();
 $fpdf->AddPage(orientation: 'portrait', size: 'letter');   // Add a page
@@ -112,7 +151,7 @@ $fpdf->Cell(w: 54, h: 15, txt: $date, border: 1, ln: 0, align: 'C', fill: false)
 ////////////////////////////////////////
 $fpdf->SetFillColor(r: 120, g: 156, b: 255);
 $fpdf->Cell(w: 46, h: 15, txt: convert_String(string: 'Número Comprobante'), border: 1, ln: 0, align: 'C', fill: true);
-$fpdf->Cell(w: 50, h: 15, txt: '0000001', border: 1, ln: 1, align: 'C', fill: false);
+$fpdf->Cell(w: 50, h: 15, txt: $ramdon, border: 1, ln: 1, align: 'C', fill: false);
 
 $fpdf->Ln(h: 30);//Salto de linea
 
@@ -120,6 +159,6 @@ $fpdf->Cell(w: 195, h: 15, txt: "___________________________", border: 0, ln: 1,
 $fpdf->SetFont(family: 'Arial', style: 'BI', size: 10);
 $fpdf->Cell(w: 195, h: 0, txt: convert_String(string: 'Firma del Cliente'), border: 0, ln: 0, align: 'C', fill: false);  // Add text to the page
 
-
+ob_end_clean(); //Limpiando el buffer de salida
 $fpdf->Output(dest: 'I', name: 'Comprobante de Aquisición.pdf', isUTF8: 'UTF-8');  // Save the document
 
