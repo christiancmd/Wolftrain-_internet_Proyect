@@ -56,7 +56,30 @@ function data_User($conn): mixed
         die("Conexión fallida: " . $conn->connect_error);
     }
 
-    $sql = "SELECT IDuser, Full_name, Email, Name_user, Service FROM usuarios WHERE rol_id = 2";
+    $sql = "SELECT * FROM servicios";
+    $result = $conn->query($sql);
+
+    $data = array();
+
+    if ($result->num_rows > 0) { // Almacenar los datos en la variable 
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+    }
+
+    return $data; //Retornar datos
+}
+
+$Users = data_user(conn: $conexion);
+
+
+function only_service($conn): mixed
+{
+    if ($conn->connect_error) {
+        die("Conexión fallida: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT service FROM usuarios";
     $result = $conn->query($sql);
 
     $data = array();
@@ -69,12 +92,29 @@ function data_User($conn): mixed
 
     $conn->close();
 
-    return $data; //Retornar datos
+    $cout_Service = array();
+
+    foreach ($data as $row) {
+        $cout_Service[] = strtolower($row["service"]);
+
+    }
+    return $cout_Service; //Retornar datos
 }
 
-$Users = data_user(conn: $conexion);
+$service_array = only_service(conn: $conexion);
 
+function filter_service($array): mixed
+{
+    $filteredArray = array_filter($array, function ($value) {
+        return !is_null($value) && $value !== "" && trim($value) !== "";
+    });
+    array_shift($filteredArray);
 
+    return $filteredArray;
+}
+
+$count_services = array_count_values($service_array);
+$services_show = filter_service($count_services);
 function convert_String($string): mixed
 {
     $string = mb_convert_encoding(string: $string, to_encoding: 'ISO-8859-1', from_encoding: 'UTF-8');
@@ -85,13 +125,12 @@ $fpdf = new pdf();
 $fpdf->AddPage(orientation: 'portrait', size: 'letter');   // Add a page
 
 $fpdf->SetFont(family: 'Arial', style: 'BIU', size: 22);
-$fpdf->Cell(w: 195, h: 15, txt: convert_String(string: 'Reporte de Inscripción de Usuarios'), border: 0, ln: 0, align: 'C', fill: false);  // Add text to the page
+$fpdf->Cell(w: 195, h: 15, txt: convert_String(string: 'Reporte total de peticiones por servicio'), border: 0, ln: 0, align: 'C', fill: false);  // Add text to the page
 
 $fpdf->Ln(h: 20); //Salto de linea
 $fpdf->SetFont(family: 'Arial', style: 'BI', size: 10);
 
-$text = "  El presente reporte de inscripción de usuarios refleja detalladamente la decisión de los usuarios de adquirir nuestros servicios de internet, servicios sustentados por la empresa Wolftrain. La visualización precisa y ordenada de estos datos permite una mejor comprensión del comportamiento y las preferencias de nuestros clientes, facilitando así la toma de decisiones estratégicas. Además, este reporte se toma como una constancia de la actividad realizada directamente por los usuarios, proporcionando una base sólida para futuros análisis y planificaciones. Su formalidad y exactitud son esenciales para garantizar la transparencia y la confiabilidad de la información presentada al jefe de la empresa Wolftrain. Así, se asegura un seguimiento riguroso del proceso de adquisición de servicios, contribuyendo al crecimiento y éxito continuo de la empresa.";
-
+$text = '  El reporte de apartados de un servicio de internet es crucial para la gestión eficiente y estratégica de la empresa. Este informe permite visualizar claramente la demanda de cada paquete disponible, facilitando así la toma de decisiones informadas sobre la oferta de servicios y el crecimiento continuo de la empresa. Este reporte no solo fortalece capacidad de respuesta de Wolftrain ante las necesidades del mercado, sino que también contribuyen al éxito sostenido de la compañía, adaptándose a cada tendencia y cada una de las oportunidades para mejorar continuamente la calidad del servicio, para asegurar la competitividad de la compañía.';
 $fpdf->MultiCell(w: 195, h: 7, txt: convert_String($text), border: 0, align: 'J');
 
 $fpdf->Ln(h: 10);//Salto de linea
@@ -99,32 +138,26 @@ $fpdf->Ln(h: 10);//Salto de linea
 $fpdf->SetFont(family: 'Arial', style: 'BI', size: 12);
 
 $fpdf->SetFillColor(r: 120, g: 156, b: 255);
-$fpdf->Cell(w: 25, h: 15, txt: convert_String(string: 'ID'), border: 1, ln: 0, align: 'C', fill: true);
-$fpdf->Cell(w: 39, h: 15, txt: convert_String(string: 'Nombre'), border: 1, ln: 0, align: 'C', fill: true);
-$fpdf->Cell(w: 53, h: 15, txt: convert_String(string: 'Email'), border: 1, ln: 0, align: 'C', fill: true);
-$fpdf->Cell(w: 36, h: 15, txt: convert_String(string: 'Usuario'), border: 1, ln: 0, align: 'C', fill: true);
-$fpdf->Cell(w: 36, h: 15, txt: convert_String(string: 'Servicio'), border: 1, ln: 1, align: 'C', fill: true);
+$fpdf->Cell(w: 38, h: 15, txt: convert_String('Servicios'), border: 1, ln: 0, align: 'C', fill: true);
+$fpdf->Cell(w: 80, h: 15, txt: convert_String(string: 'Cantidad de peticiones por servicios'), border: 1, ln: 0, align: 'C', fill: true);
+$fpdf->Cell(w: 77, h: 15, txt: convert_String(string: 'Datos'), border: 1, ln: 1, align: 'C', fill: true);
 
 $fpdf->SetFont(family: 'Arial', style: 'BI', size: 9);
-foreach ($Users as $key) {
-    $service_known = $key["Service"] != null ? $key["Service"] : "Sin indentificar";
 
-    $fpdf->Cell(w: 25, h: 12, txt: convert_String($key["IDuser"]), border: 1, ln: 0, align: 'C', fill: false);
-    $fpdf->Cell(w: 39, h: 12, txt: convert_String($key["Full_name"]), border: 1, ln: 0, align: 'C', fill: false);
-    $fpdf->Cell(w: 53, h: 12, txt: convert_String($key["Email"]), border: 1, ln: 0, align: 'C', fill: false);
-    $fpdf->Cell(w: 36, h: 12, txt: convert_String($key["Name_user"]), border: 1, ln: 0, align: 'C', fill: false);
-    $fpdf->Cell(w: 36, h: 12, txt: convert_String($service_known), border: 1, ln: 1, align: 'C', fill: false);
+foreach ($services_show as $key => $value) {
+    $fpdf->SetFont(family: 'Arial', style: 'BI', size: 9);
+    $fpdf->Cell(w: 38, h: 15, txt: convert_String($key), border: 1, ln: 0, align: 'C', fill: false);
+    $fpdf->Cell(w: 80, h: 15, txt: intval($value) > 1 ? intval($value) . " Clientes" : intval($value) . " Cliente", border: 1, ln: 0, align: 'C', fill: false);
+    $fpdf->Cell(w: 77, h: 15, txt: convert_String("Total peticiones del servicio $key es: $value"), border: 1, ln: 1, align: 'C', fill: false);
 }
 
-$fpdf->Ln(h: 10);//Salto de linea
-
+$fpdf->Ln(h: 15);//Salto de linea
 $fpdf->Cell(w: 195, h: 15, txt: "___________________________", border: 0, ln: 1, align: 'C', fill: false);
 $fpdf->SetFont(family: 'Arial', style: 'BI', size: 12);
 $fpdf->Cell(w: 195, h: 0, txt: convert_String(string: 'Firma del Administrador'), border: 0, ln: 1, align: 'C', fill: false);  // Add text to the page
 $fpdf->ln(10);
 $fpdf->SetFont(family: 'Arial', style: 'BI', size: 10);
+
 $fpdf->Cell(w: 190, h: 0, txt: convert_String($date), border: 0, ln: 0, align: 'C', fill: false);  // Add text to the page
 
-
-
-$fpdf->Output(dest: 'I', name: 'Reporte de usuarios registrados.pdf', isUTF8: 'UTF-8');  // Save the document
+$fpdf->Output(dest: 'I', name: 'Reporte total de servicios apartados.pdf', isUTF8: 'UTF-8');  // Save the document

@@ -4,6 +4,20 @@ declare(strict_types=1);
 require_once '../php/config.php';
 include '../php/conection_db.php';
 
+session_start();
+
+
+if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != '2') {
+    echo
+        '
+        <script>
+            alert("Acceso denegado");
+            window.location = "../pages/registration.php";
+        </script>
+    ';
+}
+
+
 define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
 
 function getArrayData(string $filename)
@@ -79,11 +93,10 @@ $services = servicesGroup(conexion: $conexion); // Array de servicios, solamente
 
 createJsonFile(row: $data);
 
+/*
 session_start();
 
-/*                          Al termirnar quitar los comentarios
-
-if (!isset($_SESSION['usuario'])) {
+if (!isset($_SESSION['Usuario'])) {
     echo
         '
             <script> 
@@ -94,8 +107,10 @@ if (!isset($_SESSION['usuario'])) {
     session_destroy();
     die();
 }
-    */
+print_r($_SESSION['Usuario']);
 session_destroy();
+*/
+
 
 ?>
 <!DOCTYPE html>
@@ -168,7 +183,7 @@ session_destroy();
 
                         <article class="div-grid" id="home-index">
                             <?= $icon_svg ?> <!--  CAMBIAR ICONO -->
-                            <span> <?= "Home" ?> </span>
+                            <span> <a href="home.php">Inicio</a> </span>
                         </article>
 
 
@@ -189,6 +204,7 @@ session_destroy();
         </div>
         <div class="progress"></div>
     </header>
+
     <main class="featured-products">
 
         <section class="product-grid ">
@@ -198,7 +214,7 @@ session_destroy();
                     $senteces = $key["Name_services"];
                     $newSentence = str_replace(" ", "", $senteces);
 
-                    if (in_array($newSentence, haystack: ["PlanBronce", "PlanPlata", "PlanOro"])) {
+                    if (in_array($newSentence, haystack: ["Planbronce", "Planplata", "Planoro"])) {
                         $services = "../img/home-php/" . $newSentence . "_url.jpg";
                     } else {
                         $services = "../img/home-php/unknow-info.webp";

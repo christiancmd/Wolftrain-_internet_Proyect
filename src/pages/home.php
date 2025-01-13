@@ -1,8 +1,31 @@
 <?php
 declare(strict_types=1);
 require_once '../php/config.php';
-
 include '../php/conection_db.php';
+
+/*
+echo 'id de la session: ' . session_id();
+/*
+echo "Ruta de guardado de sesión: " . ini_get('session.save_path'); // Verifica la ruta de guardado 
+echo "ID de la sesión: " . session_id();
+print_r($_SESSION);
+print_r('-------------------------');
+// Agrega valores a la sesión para probar 
+$_SESSION['test_key'] = 'test_value';
+print_r($_SESSION);
+*/
+
+session_start();
+
+if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != '2') {
+    echo
+        '
+        <script>
+            alert("Acceso denegado");
+            window.location = "../pages/registration.php";
+        </script>
+    ';
+}
 
 
 function getArrayData(string $filename)
@@ -16,7 +39,7 @@ $arrayData = getArrayData(filename: "../php/arrayData.json");
 
 
 
-$sql = "SELECT IDservices, Name_services, Price, Megas FROM servicios Where Availability = 1";
+$sql = "SELECT IDservices, Name_services, Price, Megas, Description FROM servicios Where Availability = 1";
 $result_services = $conexion->query(query: $sql);
 
 $i = 0;
@@ -30,13 +53,14 @@ if ($result_services->num_rows > 0) {
 
 define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
 
+
+
 /*
-session_start();
 
 
 
 
-if (!isset($_SESSION['usuario'])) {
+if (!isset($_SESSION['Usuario'])) {
     echo
         '
             <script> 
@@ -48,10 +72,12 @@ if (!isset($_SESSION['usuario'])) {
     die();
 }
 
-
-session_destroy();
 */
+
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -125,7 +151,7 @@ session_destroy();
 
                         <article class="div-grid" id="home-index">
                             <?= $icon_svg ?> <!--  CAMBIAR ICONO -->
-                            <span> <?= "Home" ?> </span>
+                            <span> <?= "home.php" ?> </span>
                         </article>
 
                     </div>
@@ -162,9 +188,9 @@ session_destroy();
                             <?php
                             $senteces = $key["Name_services"];
                             $newSentence = str_replace(" ", "", $senteces);
-
-                            if (in_array($newSentence, haystack: ["PlanBronce", "PlanPlata", "PlanOro"])) {
+                            if (in_array($newSentence, haystack: ["Planbronce", "Planplata", "Planoro"])) {
                                 $services = "../img/home-php/" . $newSentence . "_url.jpg";
+
                             } else {
                                 $services = "../img/home-php/unknow-info.webp";
                             }
@@ -172,12 +198,15 @@ session_destroy();
                             ?>
                             <img src="<?= $services ?>" alt="Servicio">
                         </figure>
-                        <div>
-                            <h3><?= $key['Name_services'] ?></h3>
-                            <p><?= $key['Megas'] . " Megas" ?></p>
-                            <p><?= "$" . number_format(num: (int) $key['Price'], decimals: 2, decimal_separator: '.', thousands_separator: ',') ?>
-                            </p>
+                        <div class="">
+                            <img src="../../public/Logo.jpg" alt="our logo">
 
+                            <h3><?= $key['Name_services'] ?></h3>
+                            <p class="megas-details"><?= $key["Megas"] . " Megas" ?></p>
+                            <p class="price-details">
+                                <?= "$" . number_format(num: (int) $key['Price'], decimals: 2, decimal_separator: '.', thousands_separator: ',') ?>
+                            </p>
+                            <p class="description-details"><?= $key["Description"] ?></p>
                             <button>
 
                                 <a href="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: $key["IDservices"], key: KEY_TOKEN); ?>

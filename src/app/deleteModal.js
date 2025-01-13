@@ -3,6 +3,8 @@ const modal_delete = document.querySelector('#modal-delete');
 const modal_message = document.querySelector('#modal-message');
 let local = window.location.href;
 
+
+
 function blockModal(e) {
 
     let user = e.target.classList[1] + ' ' + e.target.classList[2];

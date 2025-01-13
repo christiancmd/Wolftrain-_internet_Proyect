@@ -4,6 +4,19 @@ declare(strict_types=1);
 require_once '../php/config.php';
 include '../php/conection_db.php';
 
+
+session_start();
+
+if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != '1') {
+  echo
+    '
+        <script>
+            alert("Acceso denegado");
+            window.location = "../pages/registration.php";
+        </script>
+    ';
+}
+
 function getArrayData(string $filename)
 {
   $jsonData = file_get_contents(filename: $filename);
@@ -38,24 +51,40 @@ $data = getDataService($conexion);
 
 define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
 
-
 /*
+
 session_start();
 
-if (!isset($_SESSION['usuario'])) {
-    echo
-        '
+if (!isset($_SESSION['administrador'])) {
+  echo
+    '
             <script> 
-                alert("Por favor debes iniciar sesion");
-                window.location = "registrtion.php";
+            alert("Acceso denegado, no tienes permiso a acceder a esta pagina");
+                window.location = "registration.php";
             </script>
         ';
-    session_destroy();
-    die();
+  session_destroy();
+  die();
 }
 
-session_destroy();
 */
+
+
+//Verificar si el rol del usuario es igual a 1
+/*
+if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
+  echo
+    '
+        <script> 
+            alert("Acceso denegado, no tienes permiso a acceder a esta pagina");
+            window.location = "registration.php";
+        </script>
+    ';
+  session_destroy();
+  die();
+}*/
+
+
 ?>
 
 <!DOCTYPE html>
@@ -133,7 +162,7 @@ session_destroy();
 
             <article class="div-grid" id="home-index">
               <?= $icon_svg ?> <!--  CAMBIAR ICONO -->
-              <span><a href="../../index.html">Home</a></span>
+              <span><a href="adminHome.php">Inicio</a></span>
             </article>
 
 
@@ -160,10 +189,10 @@ session_destroy();
     <!-- Borrar servicio -->
     <div id="modal-delete" class="modal">
       <div class="modal-content">
-
-        <h2>Estas Seguro que deseas eliminar este Servicio?</h2>
-        <p id="modal-message"></p>
         <img src="../../public/logo-removebg-preview.png" alt="logo">
+        <h2>Eliminar Servicio</h2>
+        <p>Estas seguro que deseas eliminar este Servicio?</p>
+        <p id="modal-message"></p>
         <div class="button-content">
           <button type="submit" class="delete-action-button">Si, estoy seguro!</button>
           <button type="submit" class="no-delete-open">No, no quiero!</button>
@@ -215,7 +244,7 @@ session_destroy();
             <option value="1" selected>Disponible</option>
             <option value="0">No disponible</option>
           </select>
-          <div>
+          <div class="content-button">
             <button type="submit" class="button-update">Actualizar</button>
             <button type="submit" class="no-update-button">Abandonar</button>
           </div>
@@ -232,26 +261,30 @@ session_destroy();
         <h2>Crear nuevo Servicio</h2>
 
         <form action="../php/createNewService_db.php" method="POST">
-          <div class="input-group">
-            <input class="input" type="text" required id="createServiceName" name="Name_service_create">
-            <label class="label" for="createServiceName">Nombre Servicio</label>
-          </div>
+          <div class="input-half">
+            <div class="inputs-principal">
+              <div class="input-group">
+                <input class="input" type="text" required id="createServiceName" name="Name_service_create">
+                <label class="label" for="createServiceName">Nombre Servicio</label>
+              </div>
 
-          <div class="input-group">
-            <input class="input" type="text" required id="CreatePrice" name="Price_create">
-            <label class="label" for="CreatePrice">Precio</label>
-          </div>
+              <div class="input-group">
+                <input class="input" type="text" required id="CreatePrice" name="Price_create">
+                <label class="label" for="CreatePrice">Precio</label>
+              </div>
 
-          <div class="input-group">
-            <input class="input" type="text" required id="createMegas" name="Megas_create">
-            <label class="label" for="createMegas">Megas</label>
-          </div>
+              <div class="input-group">
+                <input class="input" type="text" required id="createMegas" name="Megas_create">
+                <label class="label" for="createMegas">Megas</label>
+              </div>
 
-          <div class="input-group">
-            <textarea id="createDescription" required maxlength="210" name="Description"></textarea>
-            <label class="label" for="createDescription">Descripción..</label>
-          </div>
+            </div>
+            <div class="input-group">
+              <textarea id="createDescription" required maxlength="210" name="Description"></textarea>
+              <label class="label" for="createDescription">Descripción..</label>
+            </div>
 
+          </div>
           <select class="select" id="select" required name="select">
             <option value="1" selected>Disponible</option>
             <option value="0">No disponible</option>
@@ -277,7 +310,7 @@ session_destroy();
               <path fill="currentColor"
                 d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10S17.523 2 12 2m5 11h-4v4h-2v-4H7v-2h4V7h2v4h4z" />
             </svg>
-            Nuevo Registro
+            Nuevo Servicio
           </a>
 
           <a href="../pdf/servicesReport.php" target="_blank" class="btn-createDocument">
@@ -289,8 +322,17 @@ session_destroy();
                 <path d="M14 2v4a2 2 0 0 0 2 2h4" />
               </g>
             </svg>
-            Crear Documento
+            Servicios Totales
           </a>
+
+          <a href="../pdf/countServicesReport.php" target="_blank" class="btn-countDocument">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 2048 2048">
+              <path fill="#fff"
+                d="M1185 1179q-88-75-195-115t-222-40q-88 0-170 23t-153 64t-129 100t-100 130t-65 153t-23 170H0q0-120 35-231t101-205t156-167t204-115q-113-74-176-186t-64-248q0-106 40-199t109-163T568 40T768 0t199 40t163 109t110 163t40 200q0 66-16 129t-48 119t-75 103t-101 83q65 25 124 61t111 81zM384 512q0 80 30 149t82 122t122 83t150 30q79 0 149-30t122-82t83-122t30-150q0-79-30-149t-82-122t-123-83t-149-30q-80 0-149 30t-122 82t-83 123t-30 149m1344 256q66 0 124 25t101 69t69 102t26 124t-25 124t-69 102t-102 69t-124 25q-23 0-45-3l-587 587q-27 27-62 41t-74 15q-40 0-75-15t-61-41t-41-61t-15-75q0-38 14-73t42-63l587-587q-3-22-3-45q0-66 25-124t68-101t102-69t125-26m0 512q40 0 75-15t61-41t41-61t15-75q0-41-19-82l-146 146h-91v-91l146-146q-41-19-82-19q-40 0-75 15t-61 41t-41 61t-15 75q0 41 19 82l-640 641q-19 19-19 45t19 45t45 19t45-19l641-640q41 19 82 19" />
+            </svg>
+            Historial Peticiones
+          </a>
+
         </div>
 
         <table>

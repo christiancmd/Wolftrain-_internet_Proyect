@@ -20,6 +20,9 @@ require "../../fpdf/fpdf.php";
 $fpdf = new FPDF();
 $fpdf->AddPage(orientation: 'portrait', size: 'letter');   // Add a page
 
+date_default_timezone_set(timezoneId: 'America/Caracas'); ///Ejemplo de zona horaria
+$date = date(format: 'Y-m-d');
+
 class pdf extends FPDF
 {
     public function header(): void
@@ -85,13 +88,14 @@ $fpdf->SetFont(family: 'Arial', style: 'BIU', size: 22);
 $fpdf->Cell(w: 195, h: 15, txt: convert_String(string: 'Reporte de Servicios'), border: 0, ln: 0, align: 'C', fill: false);  // Add text to the page
 
 $fpdf->Ln(h: 20); //Salto de linea
-$fpdf->SetFont(family: 'Arial', style: 'BI', size: 12);
+$fpdf->SetFont(family: 'Arial', style: 'BI', size: 10);
 
-$text = "El presente reporte de los servicios de internet ofrecidos por la empresa Wolftrain destaca la importancia y detalle de cada paquete disponible para nuestros usuarios. Incluyendo una visualización ordenada de los distintos servicios, especificando su precio y la cantidad de megas ofrecidos, facilitando así la toma de decisiones estratégicas. La formalidad y precisión de este reporte garantizan la transparencia y la confiabilidad de la información presentada al jefe de la empresa Wolftrain. De esta manera, se asegura un seguimiento detallado del proceso de suscripción y de disponibilidad del mercado, contribuyendo al crecimiento y éxito continuo de la empresa.";
+$text = "  El presente reporte de los servicios de internet ofrecidos por la empresa Wolftrain destaca la importancia y detalle de cada paquete disponible para nuestros usuarios. Incluyendo una visualización ordenada de los distintos servicios, especificando su precio y la cantidad de megas ofrecidos, facilitando así la toma de decisiones estratégicas. La formalidad y precisión de este reporte garantizan la transparencia y la confiabilidad de la información presentada al jefe de la empresa Wolftrain. De esta manera, se asegura un seguimiento detallado del proceso de suscripción y de disponibilidad del mercado, contribuyendo al crecimiento y éxito continuo de la empresa.";
 $fpdf->MultiCell(w: 195, h: 7, txt: convert_String($text), border: 0, align: 'J');
 
 $fpdf->Ln(h: 10);//Salto de linea
 
+$fpdf->SetFont(family: 'Arial', style: 'BI', size: 12);
 
 $fpdf->SetFillColor(r: 120, g: 156, b: 255);
 $fpdf->Cell(w: 38, h: 15, txt: convert_String(string: 'ID'), border: 1, ln: 0, align: 'C', fill: true);
@@ -115,5 +119,13 @@ foreach ($Users as $key) {
 }
 
 
+$fpdf->Ln(h: 15);//Salto de linea
+
+$fpdf->Cell(w: 195, h: 15, txt: "___________________________", border: 0, ln: 1, align: 'C', fill: false);
+$fpdf->SetFont(family: 'Arial', style: 'BI', size: 12);
+$fpdf->Cell(w: 195, h: 0, txt: convert_String(string: 'Firma del Administrador'), border: 0, ln: 1, align: 'C', fill: false);  // Add text to the page
+$fpdf->ln(10);
+$fpdf->SetFont(family: 'Arial', style: 'BI', size: 10);
+$fpdf->Cell(w: 190, h: 0, txt: convert_String($date), border: 0, ln: 0, align: 'C', fill: false);  // Add text to the page
 
 $fpdf->Output(dest: 'I', name: 'Reporte de Servicios registrados.pdf', isUTF8: 'UTF-8');  // Save the document

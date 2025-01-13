@@ -4,6 +4,19 @@ declare(strict_types=1);
 require_once '../php/config.php';
 include '../php/conection_db.php';
 
+session_start();
+
+if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != '1') {
+    echo
+        '
+        <script>
+            alert("Acceso denegado");
+            window.location = "../pages/registration.php";
+        </script>
+    ';
+}
+
+
 function getArrayData(string $filename)
 {
     $jsonData = file_get_contents(filename: $filename);
@@ -30,25 +43,41 @@ if ($result_services->num_rows > 0) {
 define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
 
 
-
-
+//Verificacion del admin ha iniciado session
 /*
-session_start();
 
-if (!isset($_SESSION['usuario'])) {
+if (!isset($_SESSION['administrador'])) {
     echo
         '
             <script> 
-                alert("Por favor debes iniciar sesion");
-                window.location = "registrtion.php";
+            alert("Acceso denegado, no tienes permiso a acceder a esta pagina");
+                window.location = "registration.php";
             </script>
         ';
     session_destroy();
     die();
 }
 
-session_destroy();
+
+
 */
+
+//Verificar si el rol del usuario es igual a 1
+/*
+if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
+    echo
+        '
+        <script> 
+            alert("Acceso denegado, no tienes permiso a acceder a esta pagina");
+            window.location = "registration.php";
+        </script>
+    ';
+    session_destroy();
+    die();
+}*/
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -127,7 +156,7 @@ session_destroy();
 
                         <article class="div-grid" id="home-index">
                             <?= $icon_svg ?> <!--  CAMBIAR ICONO -->
-                            <span><a href="../../index.html">Home</a></span>
+                            <span><a href="adminHome.php">Inicio</a></span>
                         </article>
 
                     </div>

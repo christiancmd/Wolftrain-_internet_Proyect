@@ -7,7 +7,7 @@ const input_principal = document.querySelector('#input-principal')
 
 
 function alertText() {
-    alert('Procedimiento fallido, no hay servidor');
+    window.location.href = "http://localhost/Wolftrain-internet-Proyecto/src/pages/registration.php"
 }
 
 function alertHero(e) {

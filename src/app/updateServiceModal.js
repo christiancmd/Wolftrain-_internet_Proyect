@@ -65,7 +65,8 @@ function blockModal(e) {
         }
     });
 
-    close_modal_update.addEventListener('click', () => {
+    close_modal_update.addEventListener('click', (e) => {
+        e.preventDefault();
         modal_update.style.display = "none";
     });
 

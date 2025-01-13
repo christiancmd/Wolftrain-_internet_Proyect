@@ -290,7 +290,9 @@ main {
     height: auto;
     top: 100px;
     position: relative;
-    background-color: var(--gray);
+    background: url(../img/img-services/background-white.jpg);
+    background-position: center;
+    background-size: cover;
 }
 
 /*-----------------------main: hero------------------------------*/
@@ -344,7 +346,7 @@ main {
 .hero-articles .articles-content {
     height: 400px;
     width: 300px;
-    background-color: var(--whiteOpacityLess);
+    background-color: var(--white);
     border: .2px solid var(--dark-gray);
     border-radius: 15px;
     display: flex;

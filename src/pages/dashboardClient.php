@@ -4,6 +4,18 @@ declare(strict_types=1);
 require_once '../php/config.php';
 include '../php/conection_db.php';
 
+
+session_start();
+
+if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != '1') {
+  echo
+    '
+        <script>
+            alert("Acceso denegado");
+            window.location = "../pages/registration.php";
+        </script>
+    ';
+}
 function getArrayData(string $filename)
 {
   $jsonData = file_get_contents(filename: $filename);
@@ -48,23 +60,60 @@ $users = getDataUsers(conexion: $conexion);
 
 define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
 
+
+/*
+session_start();
+
+if (!isset($_SESSION['administrador'])) {
+  echo
+    '
+            <script> 
+            alert("Acceso denegado, no tienes permiso a acceder a esta pagina");
+                window.location = "registration.php";
+            </script>
+        ';
+  session_destroy();
+  die();
+}
+
+*/
+
+
+//Verificacion del admin ha iniciado session
 /*
 session_start();
 
 if (!isset($_SESSION['usuario'])) {
-    echo
-        '
+  echo
+    '
             <script> 
                 alert("Por favor debes iniciar sesion");
-                window.location = "registrtion.php";
+                window.location = "registration.php";
             </script>
         ';
-    session_destroy();
-    die();
+  session_destroy();
+  die();
 }
 
-session_destroy();
+
+//Verificar si el rol del usuario es igual a 1
+
+if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
+  echo
+    '
+        <script> 
+            alert("Acceso denegado, no tienes permiso a acceder a esta pagina");
+            window.location = "registration.php";
+        </script>
+    ';
+  session_destroy();
+  die();
+}
+
 */
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -143,7 +192,7 @@ session_destroy();
 
             <article class="div-grid" id="home-index">
               <?= $icon_svg ?> <!--  CAMBIAR ICONO -->
-              <span><a href="../../index.html">Home</a></span>
+              <span><a href="adminHome.php">Inicio</a></span>
             </article>
 
 
@@ -170,10 +219,10 @@ session_destroy();
     <!-- Borrar usuario -->
     <div id="modal-delete" class="modal">
       <div class="modal-content">
-
-        <h2>Estas Seguro que deseas eliminar este usuario?</h2>
-        <p id="modal-message"></p>
         <img src="../../public/logo-removebg-preview.png" alt="logo">
+        <h2>Eliminar Servicio</h2>
+        <p>Estas seguro que deseas eliminar este Servicio?</p>
+        <p id="modal-message"></p>
         <div class="button-content">
           <button type="submit" class="delete-action-button">Si, estoy seguro!</button>
           <button type="submit" class="no-delete-open">No, no quiero!</button>
@@ -300,7 +349,7 @@ session_destroy();
                   <td><?= $key["Full_name"] ?></td>
                   <td><?= $key["Email"] ?></td>
                   <td><?= $key["Name_user"] ?></td>
-                  <td><?= $key["Service"] ?></td>
+                  <td><?= $key["Service"] != null ? $key["Service"] : "-Sin registro." ?></td>
                   <td class="action-config">
 
                     <a href="#" class="btn-edit  <?= $key["Full_name"] ?>" id="<?= $key["IDuser"] ?>">

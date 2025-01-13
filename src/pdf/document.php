@@ -141,7 +141,7 @@ $fpdf->Cell(w: 150, h: 15, txt: $arrayData['Name_user'], border: 1, ln: 1, align
 foreach ($arrayService as $key) {
     $fpdf->SetFillColor(r: 120, g: 156, b: 255);
     $fpdf->Cell(w: 42, h: 15, txt: convert_String(string: 'Servicio'), border: 1, ln: 0, align: 'C', fill: true);
-    $fpdf->Cell(w: 150, h: 15, txt: "Plan " . $key["Name_services"], border: 1, ln: 1, align: 'C', fill: false);
+    $fpdf->Cell(w: 150, h: 15, txt: $key["Name_services"], border: 1, ln: 1, align: 'C', fill: false);
 }
 
 $fpdf->SetFillColor(r: 120, g: 156, b: 255);

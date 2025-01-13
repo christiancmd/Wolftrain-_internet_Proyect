@@ -35,6 +35,7 @@ html {
     --whiteOpacity: #ffffff41;
     --whiteOpacityLess: #ffffff80;
     --yellow: #b5b50c;
+    --grayReal: rgb(68, 68, 68);
 }
 
 
@@ -321,10 +322,10 @@ html {
     background-color: var(--white);
     margin: 30% auto;
     padding: 20px;
-    border: 1px solid var(--gray);
+    border: 20px solid var(--gray);
     width: 350px;
     height: auto;
-    padding: 65px 0;
+    padding: 35px 0;
     border-radius: 10px;
 }
 
@@ -336,8 +337,20 @@ html {
 
 /* -------------------Estilos para el modal Delete ------------------------------*/
 
+#modal-delete .modal-content h2 {
+    font-size: clamp(1.8em, 2.5vw, 2.1em);
+}
+
+#modal-delete .modal-content p {
+    font-size: clamp(1em, 2.5vw, 1.2em);
+    width: 340px;
+
+}
+
+
 .modal .modal-content img {
     width: 100px;
+    filter: drop-shadow(0 0 20px var(--black));
 }
 
 .modal .button-content {
@@ -350,12 +363,9 @@ html {
     flex-direction: column;
 }
 
-.modal .button-content h2 {
-    font-size: clamp(1.2em, 2.5vw, 1.4em);
-}
+
 
 .modal .button-content button {
-    background: linear-gradient(45deg, var(--blue), var(--specialBlue));
     display: flex;
     width: 200px;
     height: 50px;
@@ -370,11 +380,19 @@ html {
     font-size: clamp(.9em, 2.5vw, 1.1em);
     font-weight: bold;
     cursor: pointer;
-
 }
 
 .modal .button-content button:hover {
     box-shadow: 0 0 10px var(--black);
+}
+
+.modal .button-content .delete-action-button {
+    background: linear-gradient(45deg, var(--blue), var(--specialBlue));
+
+}
+
+.modal .button-content .no-delete-open {
+    background: linear-gradient(45deg, var(--grayReal), var(--specialDarkBlue));
 }
 
 /* --------------------------Estilos para el modal Update---------------------------------- */
@@ -389,6 +407,8 @@ html {
 
 .modal form .content-button {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 5px;
 }
 
@@ -416,7 +436,7 @@ html {
     width: 125px;
     border-radius: 10px;
     border: none;
-    background: linear-gradient(45deg, var(--blue), var(--specialBlue));
+    background: linear-gradient(45deg, var(--grayReal), var(--specialDarkBlue));
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -424,7 +444,6 @@ html {
 }
 
 .modal form .no-update-button:hover {
-    background: linear-gradient(45deg, var(--blue), var(--specialDarkBlue));
     box-shadow: 0 0 20px var(--black);
 }
 
@@ -497,7 +516,23 @@ textarea:is(:focus, :valid)~label {
     gap: 10px;
 }
 
-/* --------------------------Estilos para el modal Update---------------------------------- */
+/* --------------------------Estilos para el modal Create---------------------------------- */
+
+
+
+#modal-create .modal-content h2 {
+    font-size: clamp(1.4em, 2.5vw, 1.9em);
+}
+
+#modal-create .modal-content .button-register {
+    background: linear-gradient(45deg, var(--blue), var(--specialDarkBlue));
+
+}
+
+#modal-create .modal-content .no-button-register {
+    background: linear-gradient(45deg, var(--grayReal), var(--specialDarkBlue));
+
+}
 
 .modal form .button-register,
 .modal form .no-button-register {
@@ -506,7 +541,6 @@ textarea:is(:focus, :valid)~label {
     width: 125px;
     border-radius: 10px;
     border: none;
-    background: linear-gradient(45deg, var(--blue), var(--specialBlue));
     color: white;
     font-weight: bold;
     cursor: pointer;
@@ -515,14 +549,29 @@ textarea:is(:focus, :valid)~label {
 
 .modal form .button-register:hover,
 .modal form .no-button-register:hover {
-    background: linear-gradient(45deg, var(--blue), var(--specialDarkBlue));
     box-shadow: 0 0 20px var(--black);
 }
 
+.input-half {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
+.inputs-principal {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
+.input-half textarea {
+    display: block;
+}
 
-
+#createDescription {
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
 
 /*-----------------------main ------------------------------*/
 
@@ -531,7 +580,9 @@ main {
     height: auto;
     top: 100px;
     position: relative;
-    background-color: var(--gray);
+    background: url(../img/img-services/background-white.jpg);
+    background-position: center;
+    background-size: cover;
     z-index: 0;
 }
 
@@ -580,7 +631,11 @@ main {
     background: linear-gradient(45deg, var(--DarkDiferentBlue), var(--specialBlue));
 }
 
-:is(.btn-register, .btn-createDocument) {
+.principal-container-services .btn-countDocument {
+    background: linear-gradient(45deg, var(--SuperDarkBlue), var(--specialBlue));
+}
+
+:is(.btn-register, .btn-createDocument, .btn-countDocument) {
     display: flex;
     width: 200px !important;
     align-items: center;
@@ -602,6 +657,7 @@ main {
 table {
     border: 2px solid var(--black);
     width: 90%;
+    background-color: var(--white);
 }
 
 thead {
@@ -661,9 +717,19 @@ tr:hover {
 
 }
 
+.availible,
+.no_availible {
+    display: flex;
+    justify-content: center;
+}
+
+
 .action-config {
     width: auto;
+}
 
+.action-config svg {
+    pointer-events: none;
 }
 
 
@@ -753,20 +819,6 @@ tr:hover {
     fill: white !important;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media (width > 1000px) {
 
     /*-------------------------Main: Header--------------------------*/
@@ -784,8 +836,6 @@ tr:hover {
         align-items: normal;
     }
 
-
-
     .ul-list-mobile .grid-brands-container .div-grid span {
         font-size: .8em;
         font-weight: bold;
@@ -795,14 +845,10 @@ tr:hover {
         right: 0% !important;
     }
 
-
-
 }
 
 @media (width > 900px) {
     /*-------------------------Main: Header--------------------------*/
-
-
 
     .header-box .icon-personal {
         display: block;
@@ -814,23 +860,19 @@ tr:hover {
         fill: var(--black) !important;
     }
 
-
     .header-box .icon-personal::after {
         content: '';
         display: block;
         width: 0;
         height: 2px;
         background: var(--DiferentBlue);
-
         transition: width .3s;
     }
 
     .header-box .icon-personal:hover::after {
         width: 100%;
         transition: width .3s;
-
     }
-
 
     .header-box {
         display: flex;
@@ -868,7 +910,6 @@ tr:hover {
         color: var(--white);
         text-decoration: none;
     }
-
 
     .header-box .navegator-box .ul-nav-desktop li a::after {
         content: '';
@@ -942,9 +983,23 @@ tr:hover {
         gap: 15px;
     }
 
+    .modal .button-content {
+        display: flex;
+        flex-direction: row;
+    }
 
     textarea {
         height: 100px !important;
+    }
+
+    .input-half {
+        display: flex;
+        flex-direction: row;
+
+    }
+
+    .input-half textarea {
+        height: 165px !important;
     }
 
 
@@ -965,7 +1020,7 @@ tr:hover {
         justify-content: center;
     }
 
-    :is(.btn-register, .btn-createDocument) {
+    :is(.btn-register, .btn-createDocument, .btn-countDocument) {
         width: 230px;
         height: 60px;
     }
