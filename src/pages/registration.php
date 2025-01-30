@@ -32,7 +32,6 @@
 
 <body>
     <!-- HEADER -->
-
     <header id="header-container">
         <div class="header-box">
             <div class="title">
@@ -74,9 +73,7 @@
             <article class="initial-box-form">
             </article>
             <article class="form-boxes">
-
                 <!--LOGIN FORM-->
-
                 <div class="form-login">
                     <h3>Iniciar Session</h3>
                     <div class="icon-form">

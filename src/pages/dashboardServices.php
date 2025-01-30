@@ -4,7 +4,6 @@ declare(strict_types=1);
 require_once '../php/config.php';
 include '../php/conection_db.php';
 
-
 session_start();
 
 if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != '1') {
@@ -42,12 +41,9 @@ function getDataService($conn)
       $data[$i] = $row;
     }
   }
-
   return !isset($data) ? array() : $data;
 }
-
 $data = getDataService($conexion);
-
 
 define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
 
@@ -68,8 +64,6 @@ if (!isset($_SESSION['administrador'])) {
 }
 
 */
-
-
 //Verificar si el rol del usuario es igual a 1
 /*
 if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
@@ -83,7 +77,6 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
   session_destroy();
   die();
 }*/
-
 
 ?>
 
@@ -199,13 +192,9 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
         </div>
       </div>
     </div>
-
     <!-- actualizar datos de Servicio -->
     <div id="modal-update" class="modal">
       <div class="modal-content">
-
-
-
         <h2>Actualizar datos de Servicio</h2>
 
         <form action="../php/updateService_db.php" method="POST" class="update-form">
@@ -252,9 +241,6 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
         </form>
       </div>
     </div>
-
-
-
     <!-- crear servicio -->
     <div id="modal-create" class="modal">
       <div class="modal-content">
@@ -456,14 +442,11 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
 
   </footer>
 
-
-
   <script src="../app/actionNavNormal.js"></script>
   <script src="../app/handleAction.js"></script>
   <script src="../app/createModal.js"></script>
   <script src="../app/deleteModal.js"></script>
   <script src="../app/updateServiceModal.js"></script>
-
 
 </body>
 

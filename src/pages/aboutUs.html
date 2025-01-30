@@ -10,6 +10,7 @@
     <meta name="Author" content="Ing.Christian Parisca">
     <!--Styles-->
     <link rel="stylesheet" href="../style/aboutUs.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!--Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +33,6 @@
 
 <body>
     <!-- HEADER -->
-
     <header id="header-container">
         <div class="header-box">
             <div class="title">
@@ -79,7 +79,7 @@
             <article class="pricipal-family-about">
                 <div class="container-member">
 
-                    <div class="img-box-about">
+                    <div class="img-box-about" data-aos="fade-right" data-aos-duration="1000">
                         <div class="nothing"></div>
                         <img src="../img/about-us-img/secundary-employeer-2-img.png" alt="person">
                     </div>
@@ -111,7 +111,7 @@
                 </div>
 
                 <div class="container-member eliminate-member">
-                    <div class="img-box-about">
+                    <div class="img-box-about" data-aos="fade-left" data-aos-duration="1500">
                         <div class="nothing"></div>
                         <img class="img-3" src="../img/about-us-img/secundary-employeer-3-img.png" alt="person">
                     </div>
@@ -130,7 +130,8 @@
         </section>
 
         <section id="advice">
-            <h2>“Recuerda siempre por qué empezaste y visualiza tu éxito.”</h2>
+            <h2 data-aos="zoom-in-down" data-aos-duration="1200">“Recuerda siempre por qué empezaste y visualiza tu
+                éxito.”</h2>
             <div class="author">
                 <small>Ing.Christian Parisca.</small>
             </div>
@@ -172,8 +173,6 @@
             </div>
         </section>
     </main>
-
-
 
     <!--FOOTER-->
     <footer id="footer-container">
@@ -221,6 +220,10 @@
         </div>
     </footer>
     <script src="../app/actionNavNormal.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 
 </body>
 

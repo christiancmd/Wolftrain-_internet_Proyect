@@ -27,7 +27,6 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != '2') {
     ';
 }
 
-
 function getArrayData(string $filename)
 {
     $jsonData = file_get_contents(filename: $filename);
@@ -36,8 +35,6 @@ function getArrayData(string $filename)
 }
 
 $arrayData = getArrayData(filename: "../php/arrayData.json");
-
-
 
 $sql = "SELECT IDservices, Name_services, Price, Megas, Description FROM servicios Where Availability = 1";
 $result_services = $conexion->query(query: $sql);
@@ -53,13 +50,7 @@ if ($result_services->num_rows > 0) {
 
 define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
 
-
-
 /*
-
-
-
-
 if (!isset($_SESSION['Usuario'])) {
     echo
         '
@@ -70,14 +61,8 @@ if (!isset($_SESSION['Usuario'])) {
         ';
     session_destroy();
     die();
-}
-
-*/
-
-
+}*/
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -173,13 +158,9 @@ if (!isset($_SESSION['Usuario'])) {
     </header>
 
     <main>
-
-
         <section class="featured-products">
             <h3>Productos Destacados</h3>
-
             <div class="product-grid">
-
                 <!-- php-->
                 <?php
                 foreach ($data as $key) { ?>
@@ -228,9 +209,7 @@ if (!isset($_SESSION['Usuario'])) {
 
     </main>
 
-
     <!-- FOOTER -->
-
     <footer id="footer-container">
         <div class="footer-box">
             <div class="footer-box-content">

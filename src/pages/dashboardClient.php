@@ -4,7 +4,6 @@ declare(strict_types=1);
 require_once '../php/config.php';
 include '../php/conection_db.php';
 
-
 session_start();
 
 if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != '1') {
@@ -24,8 +23,6 @@ function getArrayData(string $filename)
 }
 
 $arrayData = getArrayData(filename: "../php/arrayData.json");
-
-
 
 $sql = "SELECT IDservices, Name_services, Price, Megas, Description, Availability FROM servicios Where Availability = 1";
 $result_services = $conexion->query(query: $sql);
@@ -57,9 +54,7 @@ function getDataUsers(mysqli $conexion): array
 
 $users = getDataUsers(conexion: $conexion);
 
-
 define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
-
 
 /*
 session_start();
@@ -76,11 +71,11 @@ if (!isset($_SESSION['administrador'])) {
   die();
 }
 
-*/
+
 
 
 //Verificacion del admin ha iniciado session
-/*
+
 session_start();
 
 if (!isset($_SESSION['usuario'])) {
@@ -111,8 +106,6 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
 }
 
 */
-
-
 
 ?>
 
@@ -229,7 +222,6 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
         </div>
       </div>
     </div>
-
     <!-- actualizar datos de usuario -->
     <div id="modal-update" class="modal">
       <div class="modal-content">
@@ -268,7 +260,6 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
         </form>
       </div>
     </div>
-
     <!-- crear nuevo usuario -->
     <div id="modal-create" class="modal">
       <div class="modal-content">
@@ -389,7 +380,6 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
   </main>
 
   <!-- FOOTER -->
-
   <footer id="footer-container">
     <div class="footer-box">
       <div class="footer-box-content">
@@ -436,8 +426,6 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
     </div>
 
   </footer>
-
-
 
   <script src="../app/actionNavNormal.js"></script>
   <script src="../app/handleAction.js"></script>

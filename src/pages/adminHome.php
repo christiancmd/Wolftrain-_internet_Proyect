@@ -16,7 +16,6 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != '1') {
     ';
 }
 
-
 function getArrayData(string $filename)
 {
     $jsonData = file_get_contents(filename: $filename);
@@ -25,8 +24,6 @@ function getArrayData(string $filename)
 }
 
 $arrayData = getArrayData(filename: "../php/arrayData.json");
-
-
 
 $sql = "SELECT IDservices, Name_services FROM servicios Where Availability = 1";
 $result_services = $conexion->query(query: $sql);
@@ -57,13 +54,8 @@ if (!isset($_SESSION['administrador'])) {
     session_destroy();
     die();
 }
-
-
-
-*/
-
 //Verificar si el rol del usuario es igual a 1
-/*
+
 if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
     echo
         '
@@ -75,9 +67,6 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
     session_destroy();
     die();
 }*/
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -178,7 +167,6 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
     </header>
 
     <main>
-
         <section id="hero">
             <div class="container-hero">
                 <div class="hero-content">
@@ -230,10 +218,7 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
 
             </div>
         </section>
-
-
     </main>
-
 
     <!-- FOOTER -->
 
@@ -283,14 +268,9 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
         </div>
 
     </footer>
-
     <script src="../app/actionNavNormal.js"></script>
     <script src="../app/handleAction.js"></script>
     <script src="../app/directionLinkAdmin.js"></script>
-
-
-
-
 </body>
 
 </html>

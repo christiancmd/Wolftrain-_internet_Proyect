@@ -6,7 +6,6 @@ include '../php/conection_db.php';
 
 session_start();
 
-
 if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != '2') {
     echo
         '
@@ -16,7 +15,6 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != '2') {
         </script>
     ';
 }
-
 
 define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
 
@@ -76,7 +74,6 @@ function servicesGroup($conexion)
 {
     $sql = "SELECT IDservices, Name_services FROM servicios Where Availability = 1";
     $result_services = $conexion->query(query: $sql);
-
     $i = 0;
 
     if ($result_services->num_rows > 0) {
@@ -89,8 +86,6 @@ function servicesGroup($conexion)
 }
 
 $services = servicesGroup(conexion: $conexion); // Array de servicios, solamente id y nombre
-
-
 createJsonFile(row: $data);
 
 /*
@@ -110,7 +105,6 @@ if (!isset($_SESSION['Usuario'])) {
 print_r($_SESSION['Usuario']);
 session_destroy();
 */
-
 
 ?>
 <!DOCTYPE html>
@@ -185,8 +179,6 @@ session_destroy();
                             <?= $icon_svg ?> <!--  CAMBIAR ICONO -->
                             <span> <a href="home.php">Inicio</a> </span>
                         </article>
-
-
                     </div>
                     <!-- php-->
 
@@ -206,7 +198,6 @@ session_destroy();
     </header>
 
     <main class="featured-products">
-
         <section class="product-grid ">
             <?php foreach ($data as $key) { ?>
                 <div class="product">
@@ -219,7 +210,6 @@ session_destroy();
                     } else {
                         $services = "../img/home-php/unknow-info.webp";
                     }
-
                     ?>
 
                     <figure>

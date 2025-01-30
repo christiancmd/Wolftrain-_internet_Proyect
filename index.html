@@ -10,6 +10,7 @@
     <meta name="Author" content="Ing.Christian Parisca">
     <!--Style-->
     <link rel="stylesheet" href="./src/style/index.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!--Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +34,6 @@
 <body>
 
     <!-- HEADER -->
-
     <header id="header-container">
         <div class="header-box">
             <div class="title">
@@ -71,12 +71,11 @@
 
     <!-- MAIN -->
     <main id="hero">
-
         <section id="initial-box">
             <article class="principal-content-initial">
                 <div class="text-initial-box">
                     <figure>
-                        <img src="./public/Logo.jpg" alt="Our icon">
+                        <img src="./public/Logo.jpg" alt="Our icon" data-aos="zoom-in-down" data-aos-duration="1800">
                     </figure>
                     <div class="text">
                         <h2>WolfTrain para vivir una<span> mejor experiencia </span>de usuario.</h2>
@@ -178,7 +177,7 @@
             <h2>Ofrecemos <span>excelentes opciones</span> para tus necesidades</h2>
             <p>_________</p>
             <div class="box-pay">
-                <div class="border-option">
+                <div class="border-option" data-aos="fade-right" data-aos-duration="1000">
                     <article class="option">
                         <small class="name-option">Bronce - 150 Megas</small>
                         <div class="pays">
@@ -217,7 +216,7 @@
                     </article>
                 </div>
 
-                <div class="border-option">
+                <div class="border-option" data-aos="fade-left" data-aos-duration="1000">
                     <article class="option">
                         <small class="name-option">Oro - 350 Megas</small>
                         <div class="pays">
@@ -242,7 +241,8 @@
         <section id="More-info-hand">
             <article class="info-hand-a">
                 <div class="box-hand">
-                    <div class="title-info-hand">
+                    <div class="title-info-hand" data-aos="fade-up" data-aos-anchor-placement="top-center"
+                        data-aos-duration="1000">
                         <h2><span>WolfTrain </span>En Tus Manos</h2>
                         <p>____________________</p>
                     </div>
@@ -320,9 +320,10 @@
         </section>
 
         <section id="come-here">
-            <div class="section-button">
+            <div class="section-button" data-aos="fade-up" data-aos-anchor-placement="top-center"
+                data-aos-duration="1000">
                 <h2>"La <span>Mejor Tecnología</span> En Tus Manos"</h2>
-                <button type="button"><a href="src/pages/services.html">Comenzar</a></button>
+                <button type="button"><a href="src/pages/services.html" data-aos="zoom-in-up">Comenzar</a></button>
             </div>
         </section>
 
@@ -396,6 +397,10 @@
     </footer>
     <script src="src/app/index.js"></script>
     <script src="./src/app/actionNavNormal.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 
 </html>
