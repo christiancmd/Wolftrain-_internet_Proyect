@@ -30,6 +30,11 @@ function blockModal(e) {
         //let addLocal = e.view.location.href;
         //console.log(addLocal);
 
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const url = new URL(window.location.href);
+            url.searchParams.delete('limit');
+            window.history.replaceState({}, document.title, url);
+        });
 
         const dashboardServiceUrl = "http://localhost/Wolftrain-internet-Proyecto/src/pages/dashboardServices.php#";
         const dashboardClientUrl = "http://localhost/Wolftrain-internet-Proyecto/src/pages/dashboardClient.php#";
@@ -42,7 +47,7 @@ function blockModal(e) {
         } else if (dashboardServiceUrl === addLocal) {
             url = "../php/deleteServiceProcess.php";
         } else {
-            console.log('nada');
+            console.log('Links diferentes');
         }
 
         // Realizar solicitud AJAX para eliminar el usuario 

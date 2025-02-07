@@ -18,9 +18,11 @@ html {
 
 :root {
     --red: #ff0000;
+    --red-clear: #fe43438b;
     --white: #ffffff;
     --sepcialWhite: #f4f4f8;
     --black: #000000;
+    --black-clear: #00000080;
     --gray: #d5d5d5;
     --blue: #0000ff;
     --DarkBlue: #0000a9;
@@ -30,6 +32,8 @@ html {
     --specialSuperBlue: #062748;
     --DiferentBlue: #009099;
     --DarkDiferentBlue: #014c4a;
+    --green-clear: #65f965a8;
+    --green: #008000;
 }
 
 button {
@@ -261,6 +265,8 @@ form {
     flex-direction: column;
     gap: 15px;
     position: relative;
+    bottom: 25px;
+
 }
 
 .form-register #b-register {
@@ -268,9 +274,10 @@ form {
     background: none;
     width: auto;
     cursor: pointer;
-    margin-top: 10px;
     color: var(--black);
     text-decoration: none;
+    position: relative;
+    bottom: 20px;
 }
 
 .form-register #b-register:hover {
@@ -392,9 +399,40 @@ form {
 
 .form-login #b-login:hover {
     text-decoration: underline;
-    text-shadow: 0px 0px 10px #000000;
+    text-shadow: 0px 0px 10px var(--black);
 }
 
+:is(.register-message, .login-error-message) {
+    display: none;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    color: var(--black-clear);
+    font-size: .9em;
+    margin-top: 10px;
+}
+
+.login-error-message {
+    border: 1px solid var(--red);
+    background-color: var(--red-clear);
+    bottom: 20px;
+}
+
+.register-message {
+    display: none;
+    bottom: 25px;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-text {
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
 
 /*-----------------------footer ------------------------------*/
 

@@ -717,6 +717,7 @@ main {
     #dream-goals .grid-dream-container .history-box p {
         font-size: 1.2em;
         width: 600px;
+        text-align: justify;
     }
 
     .box-grid:first-child {

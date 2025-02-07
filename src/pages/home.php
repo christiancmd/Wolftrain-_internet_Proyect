@@ -217,14 +217,6 @@ if (!isset($_SESSION['Usuario'])) {
                     <img src="../../public/Logo.jpg" alt="our logo">
                     <h2>WolfTrain</h2>
                 </div>
-                <div class="footer-links">
-                    <ul>
-                        <li><a href="#container-form">Caracteristicas</a></li>
-                        <li><a href="#options-pay">Planes</a></li>
-                        <li><a href="#main-attribute">Beneficios</a></li>
-                        <li><a href="#initial-box">Inicio</a></li>
-                    </ul>
-                </div>
             </div>
             <hr>
             <div class="copy">

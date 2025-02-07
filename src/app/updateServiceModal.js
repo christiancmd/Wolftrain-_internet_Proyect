@@ -33,12 +33,9 @@ function getInfo(array_td, id) {
     input_price.value = array_text[1];
     input_megas.value = array_text[2];
     input_description.value = array_text[3];
-
 }
 
-
 function blockModal(e) {
-
     let indentification_ID = e.target.id;
 
     let count_cell = e.target.parentElement.parentElement.childNodes;

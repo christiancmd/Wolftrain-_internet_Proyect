@@ -33,32 +33,19 @@ $verificar_name_user = mysqli_query(mysql: $conexion, query: "SELECT * FROM usua
         WHERE Name_user='$name_user'");
 
 ///Comprobar correo
-
 if (mysqli_num_rows(result: $verificar_correo) > 0) {
-    echo
-        '
-        <script> 
-            alert("Este Correo ya esta registrado, intentalo con otro diferente");
-            window.location = "../pages/registration.php"
-        </script>
-    ';
+    header(header: "Location: ../pages/registration.php?error=456");
     mysqli_close(mysql: $conexion);
-    exit;
+    exit();
 
 }
 
 ///Comprobar usuario
-
 if (mysqli_num_rows(result: $verificar_name_user) > 0) {
-    echo
-        '
-        <script> 
-            alert("Este usuario ya esta registrado, intentalo con otro diferente");
-            window.location = "../pages/registration.php"
-        </script>
-    ';
+    header(header: "Location: ../pages/registration.php?error=789");
     mysqli_close(mysql: $conexion);
-    exit;
+    exit();
+
 }
 
 //Ejecutamos la consulta
@@ -66,13 +53,7 @@ if (mysqli_num_rows(result: $verificar_name_user) > 0) {
 $ejecutar = mysqli_query(mysql: $conexion, query: $query);
 
 if ($ejecutar) {
-    echo
-        '
-            <script>
-                alert("Registro Existoso!");
-                window.location= "../pages/registration.php";
-            </script>
-        ';
+    header(header: "Location: ../pages/registration.php?success=1");
 } else {
     echo
         '

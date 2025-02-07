@@ -285,6 +285,20 @@ html {
 }
 
 
+/*-----------------------main ------------------------------*/
+
+main {
+    width: 100%;
+    height: auto;
+    top: 100px;
+    position: relative;
+    background: url(../img/img-services/background-white.jpg);
+    background-position: center;
+    background-size: cover;
+    z-index: 0;
+}
+
+
 /*-----------------------main: modales ------------------------------*/
 
 
@@ -573,18 +587,28 @@ textarea:is(:focus, :valid)~label {
     overflow-y: scroll;
 }
 
-/*-----------------------main ------------------------------*/
 
-main {
+/*-----------------------main: back-arrow ------------------------------*/
+
+#back-arrow {
     width: 100%;
-    height: auto;
-    top: 100px;
-    position: relative;
-    background: url(../img/img-services/background-white.jpg);
-    background-position: center;
-    background-size: cover;
-    z-index: 0;
+    height: 50px;
+    display: flex;
+    justify-content: center;
 }
+
+#back-arrow svg {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    transition: filter 0.3s ease-in;
+    padding-top: 5px;
+}
+
+#back-arrow svg:hover {
+    filter: drop-shadow(0 0 10px var(--black));
+}
+
 
 /*-----------------------main: hero ------------------------------*/
 
@@ -670,14 +694,12 @@ td {
     padding: 24px 8px;
     max-width: 600px;
     font-size: clamp(.85em, 2.5vw, 1em);
-
 }
-
 
 th {
     background: linear-gradient(45deg, var(--specialDarkBlue), var(--specialBlue));
     color: var(--white);
-    text-align: left;
+    text-align: center;
 }
 
 
@@ -726,6 +748,8 @@ tr:hover {
 
 .action-config {
     width: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .action-config svg {
@@ -929,39 +953,6 @@ tr:hover {
         display: none;
     }
 
-    /* .edit-extra {
-        z-index: 200;
-        width: 200px;
-        height: 200px;
-        background-color: var(--DiferentBlue);
-        opacity: 0.7;
-        filter: blur(40px);
-        border-radius: 50%;
-        position: absolute;
-    }
-
-
-    .extra-six {
-        left: 0;
-        top: 0px;
-    }
-
-    .extra-three {
-        top: -20px;
-        right: 25px;
-    }
-
-    .extra-four {
-        left: 0;
-        bottom: 0;
-    }
-
-    .extra-five {
-        bottom: 0;
-        right: 0;
-    }
-*/
-
     /*-------------------------Main: modal--------------------------*/
 
     .container-form {
@@ -1002,6 +993,20 @@ tr:hover {
         height: 165px !important;
     }
 
+
+    /*-----------------------main: back-arrow ------------------------------*/
+
+    #back-arrow {
+        position: absolute;
+    }
+
+    #back-arrow svg {
+        position: absolute;
+        top: 15px;
+        left: 75px;
+        cursor: pointer;
+        z-index: 1000;
+    }
 
 
     /*-------------------------Main: Hero--------------------------*/

@@ -287,6 +287,15 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
       </div>
     </div>
 
+    <!-- Regresar -->
+    <div id="back-arrow" class="back">
+      <a href="adminHome.php">
+        <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 16 16">
+          <path fill="#075195" d="M.5 8L8 15.5V11h8V5H8V.5z" />
+        </svg>
+      </a>
+    </div>
+
     <section id="hero">
       <h2>Visualizador y administrador de Servicios</h2>
       <div class="principal-container-services">
@@ -401,14 +410,6 @@ if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
         <div class="footer-principal">
           <img src="../../public/Logo.jpg" alt="our logo">
           <h2>WolfTrain</h2>
-        </div>
-        <div class="footer-links">
-          <ul>
-            <li><a href="#container-form">Caracteristicas</a></li>
-            <li><a href="#options-pay">Planes</a></li>
-            <li><a href="#main-attribute">Beneficios</a></li>
-            <li><a href="#initial-box">Inicio</a></li>
-          </ul>
         </div>
       </div>
       <hr>
