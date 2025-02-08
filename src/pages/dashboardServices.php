@@ -3,6 +3,8 @@
 declare(strict_types=1);
 require_once '../php/config.php';
 include '../php/conection_db.php';
+require_once '../php/conexArrayData.php';
+
 
 session_start();
 
@@ -16,67 +18,12 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != '1') {
     ';
 }
 
-function getArrayData(string $filename)
-{
-  $jsonData = file_get_contents(filename: $filename);
-  $data = json_decode(json: $jsonData, associative: true);
-  return $data;
-}
-
+//conexArrayData
 $arrayData = getArrayData(filename: "../php/arrayData.json");
 
-function getDataService($conn)
-{
-
-  /*IDservices, Name_services, Price, Megas, Description, Availability */
-
-  $sql = "SELECT * FROM servicios";
-  $result_services = $conn->query(query: $sql);
-
-  $i = 0;
-
-  if ($result_services->num_rows > 0) {
-    while ($row = $result_services->fetch_assoc()) {
-      $i += 1;
-      $data[$i] = $row;
-    }
-  }
-  return !isset($data) ? array() : $data;
-}
-$data = getDataService($conexion);
+$data = getServiceFullData($conexion);
 
 define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
-
-/*
-
-session_start();
-
-if (!isset($_SESSION['administrador'])) {
-  echo
-    '
-            <script> 
-            alert("Acceso denegado, no tienes permiso a acceder a esta pagina");
-                window.location = "registration.php";
-            </script>
-        ';
-  session_destroy();
-  die();
-}
-
-*/
-//Verificar si el rol del usuario es igual a 1
-/*
-if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
-  echo
-    '
-        <script> 
-            alert("Acceso denegado, no tienes permiso a acceder a esta pagina");
-            window.location = "registration.php";
-        </script>
-    ';
-  session_destroy();
-  die();
-}*/
 
 ?>
 

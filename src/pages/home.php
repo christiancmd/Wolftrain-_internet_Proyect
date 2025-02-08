@@ -2,18 +2,8 @@
 declare(strict_types=1);
 require_once '../php/config.php';
 include '../php/conection_db.php';
+require '../php/conexArrayData.php';
 
-/*
-echo 'id de la session: ' . session_id();
-/*
-echo "Ruta de guardado de sesión: " . ini_get('session.save_path'); // Verifica la ruta de guardado 
-echo "ID de la sesión: " . session_id();
-print_r($_SESSION);
-print_r('-------------------------');
-// Agrega valores a la sesión para probar 
-$_SESSION['test_key'] = 'test_value';
-print_r($_SESSION);
-*/
 
 session_start();
 
@@ -27,41 +17,14 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != '2') {
     ';
 }
 
-function getArrayData(string $filename)
-{
-    $jsonData = file_get_contents(filename: $filename);
-    $data = json_decode(json: $jsonData, associative: true);
-    return $data;
-}
-
+//conexArrayData
 $arrayData = getArrayData(filename: "../php/arrayData.json");
+//conexArrayData
+$data = getServiceFullData(conexion: $conexion);
 
-$sql = "SELECT IDservices, Name_services, Price, Megas, Description FROM servicios Where Availability = 1";
-$result_services = $conexion->query(query: $sql);
-
-$i = 0;
-
-if ($result_services->num_rows > 0) {
-    while ($row = $result_services->fetch_assoc()) {
-        $i += 1;
-        $data[$i] = $row;
-    }
-}
 
 define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
 
-/*
-if (!isset($_SESSION['Usuario'])) {
-    echo
-        '
-            <script> 
-                alert("Por favor debes iniciar sesion");
-                window.location = "registration.php";
-            </script>
-        ';
-    session_destroy();
-    die();
-}*/
 ?>
 
 <!DOCTYPE html>
@@ -124,10 +87,10 @@ if (!isset($_SESSION['Usuario'])) {
 
                         <?php foreach ($data as $key) { ?>
                             <article class="div-grid"
-                                id="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: $key["IDservices"], key: KEY_TOKEN); ?>">
+                                id="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: (string) $key["IDservices"], key: KEY_TOKEN); ?>">
                                 <?= $icon_svg ?>
                                 <span><a
-                                        href="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: $key["IDservices"], key: KEY_TOKEN); ?>">
+                                        href="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: (string) $key["IDservices"], key: KEY_TOKEN); ?>">
                                         <?= $key["Name_services"]; ?> </a> </span>
                             </article>
                         <?php } ?>
@@ -136,7 +99,7 @@ if (!isset($_SESSION['Usuario'])) {
 
                         <article class="div-grid" id="home-index">
                             <?= $icon_svg ?> <!--  CAMBIAR ICONO -->
-                            <span> <?= "home.php" ?> </span>
+                            <span> <?= "Inicio" ?> </span>
                         </article>
 
                     </div>
@@ -190,7 +153,7 @@ if (!isset($_SESSION['Usuario'])) {
                             <p class="description-details"><?= $key["Description"] ?></p>
                             <button>
 
-                                <a href="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: $key["IDservices"], key: KEY_TOKEN); ?>
+                                <a href="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: (string) $key["IDservices"], key: KEY_TOKEN); ?>
                                     ">Detalles
                                 </a>
 
@@ -202,9 +165,6 @@ if (!isset($_SESSION['Usuario'])) {
 
                 <!-- php-->
             </div>
-
-
-
         </section>
 
     </main>

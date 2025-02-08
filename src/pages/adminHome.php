@@ -3,6 +3,8 @@
 declare(strict_types=1);
 require_once '../php/config.php';
 include '../php/conection_db.php';
+require_once '../php/conexArrayData.php';
+
 
 session_start();
 
@@ -16,57 +18,13 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != '1') {
     ';
 }
 
-function getArrayData(string $filename)
-{
-    $jsonData = file_get_contents(filename: $filename);
-    $data = json_decode(json: $jsonData, associative: true);
-    return $data;
-}
-
+//conexArrayData
 $arrayData = getArrayData(filename: "../php/arrayData.json");
+$data = getServiceBasicData($conexion);
 
-$sql = "SELECT IDservices, Name_services FROM servicios Where Availability = 1";
-$result_services = $conexion->query(query: $sql);
-
-$i = 0;
-
-if ($result_services->num_rows > 0) {
-    while ($row = $result_services->fetch_assoc()) {
-        $i += 1;
-        $data[$i] = $row;
-    }
-}
 
 define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
 
-
-//Verificacion del admin ha iniciado session
-/*
-
-if (!isset($_SESSION['administrador'])) {
-    echo
-        '
-            <script> 
-            alert("Acceso denegado, no tienes permiso a acceder a esta pagina");
-                window.location = "registration.php";
-            </script>
-        ';
-    session_destroy();
-    die();
-}
-//Verificar si el rol del usuario es igual a 1
-
-if (!isset($_SESSION['rol_id']) || $_SESSION['rol_id'] != 1) {
-    echo
-        '
-        <script> 
-            alert("Acceso denegado, no tienes permiso a acceder a esta pagina");
-            window.location = "registration.php";
-        </script>
-    ';
-    session_destroy();
-    die();
-}*/
 ?>
 
 <!DOCTYPE html>

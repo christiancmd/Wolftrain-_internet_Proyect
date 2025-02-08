@@ -9,7 +9,7 @@ function recognize_button(e) {
     } else if (detectID === "user-section") {
         window.location.href = "../pages/dashboardClient.php";
     } else if (detectID === "home-index") {
-        window.location.href = "../../index.html";
+        window.location.href = "../pages/home.php";
     } else if (detectID === "register-section") {
         window.location.href = "../pages/registration.php";
     }

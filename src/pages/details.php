@@ -3,6 +3,7 @@
 declare(strict_types=1);
 require_once '../php/config.php';
 include '../php/conection_db.php';
+require_once '../php/conexArrayData.php';
 
 session_start();
 
@@ -18,13 +19,7 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != '2') {
 
 define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
 
-function getArrayData(string $filename)
-{
-    $jsonData = file_get_contents(filename: $filename);
-    $data = json_decode(json: $jsonData, associative: true);
-    return $data;
-}
-
+//conexArrayData
 $arrayData = getArrayData(filename: "../php/arrayData.json");
 
 $id = isset($_GET['id']) ? $_GET['id'] : '';
@@ -42,17 +37,8 @@ if ($id == '' || $token == '') {
     $token_tmp = hash_hmac(algo: 'sha1', data: $id, key: KEY_TOKEN);
     if ($token_tmp == $token) {
 
-        $sql = "SELECT IDservices, Name_services, Price, Megas, Description FROM servicios WHERE IDservices = $id AND Availability = 1";
-        $result_services = $conexion->query(query: $sql);
-
-        $i = 0;
-
-        if ($result_services->num_rows > 0) {
-            while ($row = $result_services->fetch_assoc()) {
-                $i += 1;
-                $data[$i] = $row;
-            }
-        }
+        //conexArrayData
+        $data = getUniqueService(conexion: $conexion, id: $id); // Array de servicios, basado con un id
 
     } else {
         echo '
@@ -69,42 +55,11 @@ function createJsonFile($row): void
 {
     file_put_contents(filename: '../php/arrayServices.json', data: json_encode(value: $row));
 }
-
-function servicesGroup($conexion)
-{
-    $sql = "SELECT IDservices, Name_services FROM servicios Where Availability = 1";
-    $result_services = $conexion->query(query: $sql);
-    $i = 0;
-
-    if ($result_services->num_rows > 0) {
-        while ($row = $result_services->fetch_assoc()) {
-            $i += 1;
-            $name_services[$i] = $row;
-        }
-    }
-    return $name_services;
-}
-
-$services = servicesGroup(conexion: $conexion); // Array de servicios, solamente id y nombre
 createJsonFile(row: $data);
 
-/*
-session_start();
+//conexArrayData
+$services = getServiceBasicData($conexion); // Array de servicios, solamente id y nombre
 
-if (!isset($_SESSION['Usuario'])) {
-    echo
-        '
-            <script> 
-                alert("Por favor debes iniciar sesion");
-                window.location = "registration.php";
-            </script>
-        ';
-    session_destroy();
-    die();
-}
-print_r($_SESSION['Usuario']);
-session_destroy();
-*/
 
 ?>
 <!DOCTYPE html>
@@ -167,10 +122,10 @@ session_destroy();
 
                         <?php foreach ($services as $key) { ?>
                             <article class="div-grid"
-                                id="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: $key["IDservices"], key: KEY_TOKEN); ?>">
+                                id="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: (string) $key["IDservices"], key: KEY_TOKEN); ?>">
                                 <?= $icon_svg ?>
                                 <span><a
-                                        href="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: $key["IDservices"], key: KEY_TOKEN); ?>">
+                                        href="details.php?id=<?= $key["IDservices"]; ?>&token=<?= hash_hmac(algo: 'sha1', data: (string) $key["IDservices"], key: KEY_TOKEN); ?>">
                                         <?= $key["Name_services"]; ?> </a> </span>
                             </article>
                         <?php } ?>

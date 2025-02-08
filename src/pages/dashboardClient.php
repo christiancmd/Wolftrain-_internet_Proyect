@@ -3,6 +3,9 @@
 declare(strict_types=1);
 require_once '../php/config.php';
 include '../php/conection_db.php';
+require_once '../php/conexArrayData.php';
+require_once '../php/userFuntionsBoard.php';
+
 
 session_start();
 
@@ -15,75 +18,22 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != '1') {
         </script>
     ';
 }
-function getArrayData(string $filename)
-{
-    $jsonData = file_get_contents(filename: $filename);
-    $data = json_decode(json: $jsonData, associative: true);
-    return $data;
-}
 
-$arrayData = getArrayData(filename: "../php/arrayData.json");
-
-$sql = "SELECT IDservices, Name_services, Price, Megas, Description, Availability FROM servicios Where Availability = 1";
-$result_services = $conexion->query(query: $sql);
-
-$i = 0;
-
-if ($result_services->num_rows > 0) {
-    while ($row = $result_services->fetch_assoc()) {
-        $i += 1;
-        $data[$i] = $row;
-    }
-}
+//conexArrayData
+$arrayData = getArrayData(filename: "../php/arrayData.json"); //user
+//conexArrayData
+$data = getServiceFullData($conexion); //service
 
 $pag_actual = isset($_GET['pagina']) ? (int) $_GET['pagina'] : 1; ///Pagina actual 
 $reg_per_page = 10;
-function getDataUsers(mysqli $conexion, $pag_actual, $reg_per_page): array //Obtener los datos de los usuarios
-{
-    $offset = ($pag_actual - 1) * $reg_per_page;
 
-    $sql = "SELECT IDuser, Full_name, Email, Name_user, Service FROM usuarios WHERE rol_id = 2 LIMIT $reg_per_page OFFSET $offset";
-    $result_sql = $conexion->query(query: $sql);
-    $i = 0;
-
-    if ($result_sql->num_rows > 0) {
-        while ($row = $result_sql->fetch_assoc()) {
-            $i += 1;
-            $dataUser[$i] = $row;
-        }
-    }
-    return !isset($dataUser) ? array() : $dataUser;
-}
-
-function countUsers(mysqli $conexion): int      //Calcular el total depaginas
-{
-    $sql = "SELECT COUNT(*) as total FROM usuarios WHERE rol_id = 2";
-    $result_sql = $conexion->query(query: $sql);
-    $total = $result_sql->fetch_assoc();
-    return intval(value: $total['total']);
-}
-
-$users = getDataUsers(conexion: $conexion, pag_actual: $pag_actual, reg_per_page: $reg_per_page); //Obtener los datos de los usuarios
+$users = getDataUsers(conn: $conexion, pag_actual: $pag_actual, reg_per_page: $reg_per_page); //Obtener los datos de los usuarios
 $count_users = countUsers(conexion: $conexion); //Calcular el total de paginas
 $total_pag = ceil(num: $count_users / 10);
 $pag_users = array_chunk($users, $reg_per_page);
+
 define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
 
-
-function getDataUni($filtro, $conn): mixed  //Obtener los datos de un usuario
-{
-    $sql = "SELECT * FROM usuarios WHERE LOWER(Full_name) LIKE '%$filtro%' AND rol_id = 2 LIMIT 1";
-    $result = $conn->query($sql);
-
-    $usuarios = [];
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $usuarios[] = $row;
-        }
-    }
-
-    return $usuarios;
-}
 
 $unique_filter = null;
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
