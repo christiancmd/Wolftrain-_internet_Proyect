@@ -7,6 +7,7 @@
 body {
     font-family: "Poppins", sans-serif;
     width: 100%;
+    overflow-x: hidden;
 }
 
 html {
@@ -42,7 +43,7 @@ button {
 
 #header-container {
     width: 100%;
-    height: 100px;
+    height: 90px;
     position: fixed;
     z-index: 1000;
     background: linear-gradient(45deg, var(--DiferentBlue), var(--specialDarkBlue));
@@ -56,12 +57,13 @@ button {
 
 
 .header-box {
-    width: 100%;
+    width: auto;
     height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0px 25px;
+    position: relative;
 }
 
 .header-box .title {
@@ -104,14 +106,14 @@ button {
     position: absolute;
     width: 100%;
     left: -100%;
-    height: 100vh;
+    height: 120vh;
     /* background-color: var(--specialBlue);*/
     /*    background: linear-gradient(to bottom, rgba(5, 5, 5, 0.941) 0%, rgba(40, 40, 40, 0.593) 100%), url(/assents/img/index-img/click-section.jpg);*/
     background: url('../img/background-movil-hiperlink.jpg');
     background-position: center;
     background-size: cover;
     top: 0px;
-    padding: 50px 20px;
+    padding: 0px 20px 50px 20px;
     transition: left .4s;
     display: flex;
     align-items: center;
@@ -192,7 +194,6 @@ button {
 
 
 
-
 /*--------------------------Main------------------------------*/
 
 #hero {
@@ -201,7 +202,6 @@ button {
     top: 90px;
     position: relative;
     /* background-color: var(--sepcialWhite);*/
-    width: 100%;
 }
 
 /*-----------------------Main: Initial------------------------------*/
@@ -456,7 +456,7 @@ button {
 .box-pay .border-option {
     background: var(--border-linear);
     aspect-ratio: 10/11;
-    width: 315px;
+    width: 285px;
     padding: 5px;
     border-radius: 16px;
     position: relative;
@@ -477,13 +477,12 @@ button {
 
 .box-pay .option {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 35px;
     background-color: var(--white);
-    width: 305px;
+    width: 275px;
     height: 450px;
     padding: 20px 25px;
     box-shadow: 0 0 5px var(--black);
@@ -494,7 +493,6 @@ button {
 .box-pay .option:hover {
     box-shadow: 0 0 20px var(--black);
     border: 1px solid var(--DarkDiferentBlue);
-
 }
 
 .box-pay .option .name-option {
@@ -512,7 +510,6 @@ button {
     font-weight: 700;
     font-size: 1.2em;
 }
-
 
 .box-pay .option .list-benefits {
     display: flex;
@@ -554,7 +551,7 @@ button {
 
 #More-info-hand {
     width: 100%;
-    height: 110vh;
+    height: calc(auto + 100px);
     padding: 50px 25px;
     display: flex;
     flex-direction: column;
@@ -688,9 +685,9 @@ button {
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.719) 0%, rgba(104, 160, 163, 0.695) 100%), url(../../src/img/index-img/click-section.jpg);
     background-position: center;
     background-size: cover;
-    background-repeat: none;
+    /*background-repeat: none;*/
     background-attachment: fixed;
-    object-fit: cover;
+    object-fit: fill;
 }
 
 .section-button {
@@ -744,7 +741,7 @@ button {
 #location {
     display: flex;
     position: relative;
-    height: 65vh;
+    height: 80vh;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -868,9 +865,10 @@ button {
 
 /*---------------------Media queries--------------------------*/
 
+@media (width >=700px) {
 
+    /*-------------------------desktop--------------------------*/
 
-@media (width >=1000px) {
 
     .ul-nav-desktop {
         display: flex;
@@ -889,11 +887,111 @@ button {
         display: none;
     }
 
+
+    /*-------------------------Main: Header--------------------------*/
+
+    #hero {
+        width: 100%;
+
+    }
+
+    .header-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        padding: 0 100px;
+        position: 0;
+    }
+
+    .header-box .navegator-box .ul-nav-desktop {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        gap: 35px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .header-box .navegator-box .ul-nav-desktop svg {
+        cursor: pointer;
+    }
+
+
+
+    .header-box .navegator-box .ul-nav-desktop li {
+        font-size: 1.5em;
+        list-style: none;
+    }
+
+    .header-box .navegator-box .ul-nav-desktop li a {
+        color: var(--white);
+        text-decoration: none;
+    }
+
+
+    .header-box .navegator-box .ul-nav-desktop li a::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 2px;
+        background: var(--DiferentBlue);
+        transition: width .3s;
+    }
+
+    .header-box .navegator-box .ul-nav-desktop li a:hover::after {
+        width: 100%;
+        transition: width .3s;
+    }
+
+    .header-box .navegator-box .icon-box svg {
+        display: block;
+    }
+
+}
+
+
+@media (width >=1000px) {
+    /*-------------------------header- icon personal--------------------------*/
+
+    .header-box .icon-personal {
+        display: block;
+        color: var(--white);
+        text-decoration: none;
+    }
+
+    .header-box .icon-personal svg:hover {
+        fill: var(--black) !important;
+    }
+
+
+    .header-box .icon-personal::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 2px;
+        background: var(--DiferentBlue);
+
+        transition: width .3s;
+    }
+
+    .header-box .icon-personal:hover::after {
+        width: 100%;
+        transition: width .3s;
+    }
+
+
+
     /*-------------------------Hero--------------------------*/
 
     #hero {
         width: 100% !important;
     }
+
+    .header-box .navegator-box .icon-box svg {
+        display: none;
+    }
+
 
     /*-------------------------Main: Initial--------------------------*/
 
@@ -1133,99 +1231,7 @@ button {
     }
 }
 
-
-
-
 @media (width > 1200px) {
-
-    .header-box .icon-personal {
-        display: block;
-        color: var(--white);
-        text-decoration: none;
-    }
-
-    .header-box .icon-personal svg:hover {
-        fill: var(--black) !important;
-    }
-
-
-    .header-box .icon-personal::after {
-        content: '';
-        display: block;
-        width: 0;
-        height: 2px;
-        background: var(--DiferentBlue);
-
-        transition: width .3s;
-    }
-
-    .header-box .icon-personal:hover::after {
-        width: 100%;
-        transition: width .3s;
-
-    }
-
-
-
-    /*-------------------------Main: Header--------------------------*/
-
-    #hero {
-        width: 100%;
-
-    }
-
-    .header-box {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        text-align: center;
-        padding: 0 100px;
-        position: 0;
-    }
-
-    .header-box .navegator-box .ul-nav-desktop {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        gap: 35px;
-        font-family: Georgia, 'Times New Roman', Times, serif;
-    }
-
-    .header-box .navegator-box .ul-nav-desktop svg {
-        cursor: pointer;
-    }
-
-
-
-    .header-box .navegator-box .ul-nav-desktop li {
-        font-size: 1.5em;
-        list-style: none;
-    }
-
-    .header-box .navegator-box .ul-nav-desktop li a {
-        color: var(--white);
-        text-decoration: none;
-    }
-
-
-    .header-box .navegator-box .ul-nav-desktop li a::after {
-        content: '';
-        display: block;
-        width: 0;
-        height: 2px;
-        background: var(--DiferentBlue);
-        transition: width .3s;
-    }
-
-    .header-box .navegator-box .ul-nav-desktop li a:hover::after {
-        width: 100%;
-        transition: width .3s;
-    }
-
-    .header-box .navegator-box .icon-box svg {
-        display: none;
-    }
 
 
     /*-------------------------Main: Initial--------------------------*/

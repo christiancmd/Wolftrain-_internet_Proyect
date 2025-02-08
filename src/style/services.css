@@ -323,6 +323,7 @@ main {
 }
 
 .box-pay {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -349,11 +350,8 @@ main {
 
     100% {
         background: var(--border-linear-alternate);
-
     }
 }
-
-
 
 .box-pay .option {
     display: flex;
@@ -368,15 +366,11 @@ main {
     box-shadow: 0 0 10px var(--black);
     border-radius: 10px;
     transition: box-shadow 0.2s ease-in-out;
-
 }
-
-
 
 .box-pay .option:hover {
     box-shadow: 0 0 20px var(--black);
     border: 1px solid var(--DarkDiferentBlue);
-
 }
 
 .box-pay .option .name-option {
@@ -914,6 +908,7 @@ main {
     .box-pay {
         display: flex;
         flex-direction: row;
+        justify-content: center;
         gap: 20px;
     }
 

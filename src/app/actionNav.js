@@ -5,9 +5,6 @@ const active_nav_mobile_button = document.querySelector('#active-nav-button');
 const navigator = document.querySelector('.ul-list-mobile');
 const section_principal = document.querySelector('.featured-products');
 
-
-
-
 const action_nav_Mobile = () => {
     section_principal.classList.remove('dark-mode');
     navigator.classList.toggle('action-nav');

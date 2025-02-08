@@ -17,6 +17,3 @@ function alertHero(e) {
     }
 }
 button_hero.addEventListener('click', alertHero);
-
-
-
