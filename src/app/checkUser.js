@@ -46,8 +46,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const error = urlParams.get('error');
     const success = urlParams.get('success');
 
-    console.log(error);
-
     if (error === '123') {
         //Login Warning Message
         error_message_login(register_box, login_box);

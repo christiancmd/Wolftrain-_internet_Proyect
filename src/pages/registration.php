@@ -128,17 +128,17 @@
 
                         <div class="input-group">
                             <input class="input" type="email" required id="email" name="Email" maxlength="30">
-                            <label class="label" for="email">Correo Electronico</label>
+                            <label class="label" for="Email">Correo Electronico</label>
                         </div>
 
                         <div class="input-group">
                             <input class="input" type="text" required id="user" name="Name_user" maxlength="15">
-                            <label class="label" for="email">Usuario</label>
+                            <label class="label" for="Name_user">Usuario</label>
                         </div>
 
                         <div class="input-group">
                             <input class="input" type="password" required id="password" name="Password" maxlength="9">
-                            <label class="label" for="password">Contraseña</label>
+                            <label class="label" for="Password">Contraseña</label>
                         </div>
 
                         <button type="submit" class="button-register">Registrarse</button>
@@ -198,12 +198,13 @@
                     </div>
                     <form action="../php/login_db.php" method="POST">
                         <div class="input-group">
-                            <input class="input" type="email" required id="email" name="Email" maxlength="30">
-                            <label class="label" for="email">Correo Electronico</label>
+                            <input class="input" type="email" required id="email-login" name="Email"
+                                autocomplete="email" maxlength="30">
+                            <label class="label" for="Email">Correo Electronico</label>
                         </div>
                         <div class="input-group">
-                            <input class="input" type="text" required id="password" name="Password" maxlength="9">
-                            <label class="label" for="password">Contraseña</label>
+                            <input class="input" type="text" required id="password-login" name="Password" maxlength="9">
+                            <label class="label" for="Password">Contraseña</label>
                         </div>
                         <button type="submit" class="button-register">Iniciar Sesion</button>
                     </form>

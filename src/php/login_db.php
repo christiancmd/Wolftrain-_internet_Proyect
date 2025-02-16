@@ -20,8 +20,11 @@ if (mysqli_num_rows(result: $validar_login) > 0) {
     if ($conn->connect_error) {
         die("Conexión fallida: " . $conn->connect_error);
     }
-    $sql = "SELECT * FROM usuarios where Email = '$email' and Password = '$password'";
-    $result = $conn->query(query: $sql);
+
+    $query = $conexion->prepare(query: "SELECT * FROM usuarios WHERE Email = ? AND Password = ?");
+    $query->bind_param("ss", $email, $password);
+    $query->execute();
+    $result = $query->get_result();
 
     function createJsonFile($row): void
     {

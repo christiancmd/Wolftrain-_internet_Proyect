@@ -20,7 +20,7 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != '2') {
 //conexArrayData
 $arrayData = getArrayData(filename: "../php/arrayData.json");
 //conexArrayData
-$data = getServiceFullData(conexion: $conexion);
+$data = getServiceAvailibleData(conexion: $conexion);
 
 
 define(constant_name: "userPhoto", value: "../img/home-php/user-icon.png");
